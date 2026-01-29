@@ -12,7 +12,7 @@ const popIn = {
   hidden: { opacity: 0, scale: 0.8, rotate: -4 },
   visible: {
     opacity: 1, scale: 1, rotate: 0,
-    transition: { type: "spring", stiffness: 120 }
+    transition: { type: "spring" as const, stiffness: 120 }
   }
 };
 
