@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/components/CartProvider";
+import ProcessAndScience from "@/components/ProcessAndScience";
 import { PRODUCT, formatPrice, formatPriceShort } from "@/lib/utils";
 
 export default function Home() {
@@ -35,8 +36,8 @@ export default function Home() {
         <div className="w-full md:w-1/2 bg-uddy-pink p-10 md:p-20 flex flex-col justify-center relative border-b-4 md:border-b-0 md:border-r-4 border-uddy-black">
 
           {/* Floating Sticker */}
-          <div className="absolute top-6 right-6 md:top-12 md:right-12 w-32 h-32 bg-uddy-yellow border-4 border-uddy-black rounded-full flex items-center justify-center text-center font-black -rotate-[20deg] shadow-hard z-10 animate-bounce" style={{ animationDuration: '1.5s' }}>
-            <span className="text-xs leading-tight text-uddy-black">SEBUM<br/>MIMICKING<br/>MAGIC</span>
+          <div className="absolute top-16 right-6 md:top-24 md:right-12 w-32 h-32 bg-uddy-yellow border-4 border-uddy-black rounded-full flex items-center justify-center text-center font-black -rotate-[20deg] shadow-hard z-10 animate-bounce" style={{ animationDuration: '1.5s' }}>
+            <span className="text-sm leading-tight text-uddy-black">THE<br/>O.G. SKIN<br/>FOOD</span>
           </div>
 
           <h1 className="text-7xl md:text-9xl font-black leading-[0.85] mb-8 text-white drop-shadow-[6px_6px_0px_#1A1A1A]">
@@ -96,43 +97,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NO NASTIES SECTION */}
-      <section className="py-20 bg-uddy-cream border-b-4 border-uddy-black">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
-            <div>
-              <span className="text-uddy-green uppercase tracking-widest text-sm mb-2 block" style={{ fontWeight: 900, fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}>Transparency</span>
-              <h2 className="text-5xl md:text-6xl uppercase leading-none tracking-tight" style={{ fontWeight: 900, fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}>
-                No Nasties.<br/>Just Nature.
-              </h2>
-            </div>
-            <p className="font-script text-xl md:text-2xl text-uddy-green -rotate-3">Simple formulations, thoughtful sourcing.</p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="bg-white border-4 border-uddy-black p-2 shadow-[6px_6px_0px_0px_#1BC496] hover:-translate-y-2 transition-transform aspect-square flex flex-col items-center justify-center">
-              <Image src="/cow-face.png" alt="Cow" width={240} height={240} className="w-full h-auto object-contain" />
-              <h3 className="text-base uppercase mt-1" style={{ fontWeight: 900, fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}>Grass Fed</h3>
-              <p className="text-xs text-center leading-tight text-balance" style={{ fontWeight: 800, fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}>Sourced from happy&nbsp;cows in&nbsp;the&nbsp;UK.</p>
-            </div>
-            <div className="bg-white border-4 border-uddy-black p-2 shadow-[6px_6px_0px_0px_#FF91B6] hover:-translate-y-2 transition-transform aspect-square flex flex-col items-center justify-center">
-              <Image src="/honey.png" alt="Honey" width={240} height={240} className="w-full h-auto object-contain" />
-              <h3 className="text-base uppercase mt-1" style={{ fontWeight: 900, fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}>Raw Honey</h3>
-              <p className="text-xs text-center leading-tight text-balance" style={{ fontWeight: 800, fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}>Antimicrobial repair straight from&nbsp;the&nbsp;hive.</p>
-            </div>
-            <div className="bg-white border-4 border-uddy-black p-2 shadow-[6px_6px_0px_0px_#1BC496] hover:-translate-y-2 transition-transform aspect-square flex flex-col items-center justify-center">
-              <Image src="/bowl.png" alt="Bowl" width={240} height={240} className="w-full h-auto object-contain" />
-              <h3 className="text-base uppercase mt-1" style={{ fontWeight: 900, fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}>Slow Render</h3>
-              <p className="text-xs text-center leading-tight text-balance" style={{ fontWeight: 800, fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}>Purified gently to keep the&nbsp;vitamins&nbsp;in.</p>
-            </div>
-            <div className="bg-white border-4 border-uddy-black p-2 shadow-[6px_6px_0px_0px_#FF91B6] hover:-translate-y-2 transition-transform aspect-square flex flex-col items-center justify-center">
-              <Image src="/box.png" alt="Box" width={240} height={240} className="w-full h-auto object-contain" />
-              <h3 className="text-base uppercase mt-1" style={{ fontWeight: 900, fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}>Hand Poured</h3>
-              <p className="text-xs text-center leading-tight text-balance" style={{ fontWeight: 800, fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}>Small batches made by Jack&nbsp;&amp;&nbsp;Hollie.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* PROCESS & SCIENCE SECTION */}
+      <ProcessAndScience />
 
       {/* PICK YOUR POT SECTION */}
       <section className="py-24 bg-uddy-green border-b-4 border-uddy-black relative overflow-hidden">
@@ -150,12 +116,12 @@ export default function Home() {
 
           {/* Headline & Subtitle */}
           <div className="text-center mb-20">
-            <h2 className="text-7xl md:text-9xl font-black text-white mb-8 drop-shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
+            <h2 className="text-5xl md:text-7xl font-black text-white mb-8">
               PICK YOUR POT
             </h2>
 
             {/* Rotated Box */}
-            <div className="inline-block bg-white border-4 border-uddy-black px-8 py-3 transform -rotate-1 shadow-[4px_4px_0px_0px_#1A1A1A]">
+            <div className="inline-block bg-white border-4 border-uddy-black px-8 py-3 transform -rotate-3 shadow-[4px_4px_0px_0px_#1A1A1A]">
               <span className="font-black uppercase tracking-widest text-sm md:text-base text-uddy-black">
                 Same Formula • Different Vibe
               </span>
@@ -166,62 +132,76 @@ export default function Home() {
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 px-4 md:px-8">
 
             {/* Green Jar Card */}
-            <div className="flex flex-col">
-              <div className="group bg-white border-4 border-uddy-black aspect-square relative shadow-[12px_12px_0px_0px_#1A1A1A] flex flex-col hover:-translate-y-1 hover:rotate-1 hover:shadow-[16px_16px_0px_0px_#1A1A1A] transition-all duration-300">
+            <div className="group flex flex-col">
+              {/* Card + Button wrapper */}
+              <div className="relative">
+                {/* White card */}
+                <div className="bg-white border-4 border-uddy-black aspect-square relative shadow-[12px_12px_0px_0px_#1A1A1A] group-hover:shadow-[0px_0px_0px_0px_#1A1A1A] flex items-center justify-center p-8 transition-all duration-300">
 
-                {/* Pink Price Sticker */}
-                <div className="absolute -top-5 -right-5 w-16 h-16 md:w-20 md:h-20 bg-uddy-pink rounded-full border-2 border-uddy-black flex items-center justify-center z-20 transform rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-all">
-                  <span className="font-black text-lg md:text-xl text-uddy-black">{formatPriceShort(PRODUCT.price)}</span>
-                </div>
-
-                {/* Main Content */}
-                <div className="flex-1 flex items-center justify-center p-8">
-                  <div className="w-44 h-44 md:w-64 md:h-64 rounded-full bg-uddy-green border-2 border-uddy-black flex items-center justify-center text-center group-hover:scale-105 transition-transform">
-                    <span className="font-black text-white text-xl md:text-2xl uppercase leading-tight">Green<br/>Jar</span>
+                  {/* Pink Price Sticker */}
+                  <div className="absolute -top-5 -right-5 w-16 h-16 md:w-20 md:h-20 bg-uddy-pink rounded-full border-2 border-uddy-black flex items-center justify-center z-20 transform rotate-12 group-hover:rotate-0 group-hover:scale-110 transition-all">
+                    <span className="font-black text-lg md:text-xl text-uddy-black">{formatPriceShort(PRODUCT.price)}</span>
                   </div>
+
+                  <Image src="/product-green.png" alt="The Classic Green" width={400} height={400} className="w-1/2 h-1/2 object-contain group-hover:scale-105 transition-transform" />
                 </div>
 
-                {/* Button Bar */}
-                <button
-                  onClick={handleAddGreen}
-                  className="bg-uddy-black text-uddy-green font-black uppercase py-5 text-lg md:text-xl tracking-widest hover:bg-uddy-green hover:text-uddy-black transition-colors border-t-4 border-uddy-black"
-                >
-                  Add to Cart
-                </button>
+                {/* Hidden name + Button stack */}
+                <div className="relative">
+                  {/* Name text - sits behind the button, revealed on hover */}
+                  <div className="text-center py-4 bg-uddy-green">
+                    <h3 className="font-black text-xl md:text-2xl uppercase text-white">The Classic Green</h3>
+                  </div>
+                  {/* Button - covers the name, slides up on hover */}
+                  <button
+                    onClick={handleAddGreen}
+                    className="absolute inset-0 w-full bg-uddy-black text-uddy-green font-black uppercase py-5 text-lg md:text-xl tracking-widest border-4 border-uddy-black border-t-0 group-hover:-translate-y-full transition-all duration-300 hover:bg-uddy-green hover:text-uddy-black z-10"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
-              <div className="text-center mt-6">
-                <h3 className="font-black text-2xl md:text-3xl uppercase text-uddy-black mb-1">The Classic Green</h3>
-                <p className="font-bold text-sm md:text-base text-uddy-green">Cow Tallow Face Balm (Lavender)</p>
+
+              {/* Product name always visible */}
+              <div className="text-center mt-4">
+                <p className="font-bold text-sm md:text-base text-uddy-black">Cow Tallow Face Balm (Lavender)</p>
               </div>
             </div>
 
             {/* Pink Jar Card */}
-            <div className="flex flex-col">
-              <div className="group bg-white border-4 border-uddy-black aspect-square relative shadow-[12px_12px_0px_0px_#1A1A1A] flex flex-col hover:-translate-y-1 hover:-rotate-1 hover:shadow-[16px_16px_0px_0px_#1A1A1A] transition-all duration-300">
+            <div className="group flex flex-col">
+              {/* Card + Button wrapper */}
+              <div className="relative">
+                {/* White card */}
+                <div className="bg-white border-4 border-uddy-black aspect-square relative shadow-[12px_12px_0px_0px_#1A1A1A] group-hover:shadow-[0px_0px_0px_0px_#1A1A1A] flex items-center justify-center p-8 transition-all duration-300">
 
-                {/* Yellow Price Sticker */}
-                <div className="absolute -top-5 -right-5 w-16 h-16 md:w-20 md:h-20 bg-uddy-yellow rounded-full border-2 border-uddy-black flex items-center justify-center z-20 transform -rotate-6 group-hover:rotate-0 group-hover:scale-110 transition-all">
-                  <span className="font-black text-lg md:text-xl text-uddy-black">{formatPriceShort(PRODUCT.price)}</span>
-                </div>
-
-                {/* Main Content */}
-                <div className="flex-1 flex items-center justify-center p-8">
-                  <div className="w-44 h-44 md:w-64 md:h-64 rounded-full bg-uddy-pink border-2 border-uddy-black flex items-center justify-center text-center group-hover:scale-105 transition-transform">
-                    <span className="font-black text-white text-xl md:text-2xl uppercase leading-tight">Pink<br/>Jar</span>
+                  {/* Yellow Price Sticker */}
+                  <div className="absolute -top-5 -right-5 w-16 h-16 md:w-20 md:h-20 bg-uddy-yellow rounded-full border-2 border-uddy-black flex items-center justify-center z-20 transform -rotate-6 group-hover:rotate-0 group-hover:scale-110 transition-all">
+                    <span className="font-black text-lg md:text-xl text-uddy-black">{formatPriceShort(PRODUCT.price)}</span>
                   </div>
+
+                  <Image src="/product-pink.png" alt="The Punchy Pink" width={400} height={400} className="w-1/2 h-1/2 object-contain group-hover:scale-105 transition-transform" />
                 </div>
 
-                {/* Button Bar */}
-                <button
-                  onClick={handleAddPink}
-                  className="bg-uddy-black text-uddy-green font-black uppercase py-5 text-lg md:text-xl tracking-widest hover:bg-uddy-pink hover:text-uddy-black transition-colors border-t-4 border-uddy-black"
-                >
-                  Add to Cart
-                </button>
+                {/* Hidden name + Button stack */}
+                <div className="relative">
+                  {/* Name text - sits behind the button, revealed on hover */}
+                  <div className="text-center py-4 bg-uddy-pink">
+                    <h3 className="font-black text-xl md:text-2xl uppercase text-white">The Punchy Pink</h3>
+                  </div>
+                  {/* Button - covers the name, slides up on hover */}
+                  <button
+                    onClick={handleAddPink}
+                    className="absolute inset-0 w-full bg-uddy-black text-uddy-pink font-black uppercase py-5 text-lg md:text-xl tracking-widest border-4 border-uddy-black border-t-0 group-hover:-translate-y-full transition-all duration-300 hover:bg-uddy-pink hover:text-uddy-black z-10"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
-              <div className="text-center mt-6">
-                <h3 className="font-black text-2xl md:text-3xl uppercase text-uddy-black mb-1">The Punchy Pink</h3>
-                <p className="font-bold text-sm md:text-base text-uddy-green">Cow Tallow Face Balm (Lavender)</p>
+
+              {/* Product name always visible */}
+              <div className="text-center mt-4">
+                <p className="font-bold text-sm md:text-base text-uddy-black">Cow Tallow Face Balm (Lavender)</p>
               </div>
             </div>
 

@@ -14,7 +14,7 @@ export default function AboutPage() {
     <main className="bg-[#FFFDF5] text-[#1A1A1A] font-sans overflow-x-hidden">
 
       {/* HERO SECTION: THE POLAROID */}
-      <header className="min-h-[90vh] flex flex-col items-center justify-center relative bg-paper py-20 px-6">
+      <header className="min-h-[80vh] flex flex-col items-center justify-center relative bg-paper pt-2 pb-16 px-6">
 
         {/* The Photo Frame */}
         <div className="relative bg-white p-4 pb-16 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] rotate-2 border-4 border-[#1A1A1A] max-w-2xl w-full z-10">
@@ -24,7 +24,7 @@ export default function AboutPage() {
           {/* Main Photo */}
           <div className="bg-gray-200 aspect-video w-full border-2 border-[#1A1A1A] overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
              <Image
-               src="/promo-6.jpg"
+               src="/promo-8.png"
                alt="Jack and Hollie"
                width={800}
                height={450}
@@ -39,8 +39,8 @@ export default function AboutPage() {
         </div>
 
         {/* Floating Headline */}
-        <h1 className="mt-12 text-6xl md:text-8xl font-black uppercase text-center leading-[0.9] text-stroke-white relative z-20 drop-shadow-md">
-            Two Different <br /> <span className="text-uddy-pink" style={{ WebkitTextStroke: '2px #1A1A1A', color: '#FF91B6' }}>Skin Stories.</span>
+        <h1 className="mt-20 text-5xl md:text-7xl font-black uppercase text-center leading-[0.9] text-[#3D3D3D] relative z-20">
+            Two Different <br /> <span className="text-[#F4A7C1]">Skin Stories.</span>
         </h1>
       </header>
 
@@ -52,7 +52,7 @@ export default function AboutPage() {
                 <span className="font-script text-[#1BC496] text-4xl">Jack&apos;s Story →</span>
             </div>
 
-            <h2 className="text-4xl font-black uppercase mb-8 text-[#1BC496]">
+            <h2 className="text-4xl font-black uppercase mb-8 text-white">
                 &quot;My skin was always a problem to solve.&quot;
             </h2>
 
@@ -151,11 +151,11 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="py-24 bg-[#1BC496]">
         <div className="container mx-auto px-6 max-w-3xl text-center">
-          <h2 className="text-4xl md:text-5xl font-black uppercase text-white drop-shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-6">
-            Ready to Try It?
+          <h2 className="text-3xl md:text-4xl font-black uppercase text-white drop-shadow-[3px_3px_0px_rgba(0,0,0,1)] mb-6 leading-relaxed">
+            Skin Doesn&apos;t Need Fighting.<br /> It Needs Feeding.
           </h2>
           <p className="text-xl font-bold text-[#1A1A1A] mb-8">
-            Experience the simplicity of tallow-based skincare.
+            Ready to try it?
           </p>
           <Link
             href="/product/cow-tallow-face-balm"

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -40,10 +41,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
-              <span className="text-4xl font-black tracking-tight">
-                <span className="text-uddy-pink">uddy</span>
-                <span className="text-uddy-green">.</span>
-              </span>
+              <Image
+                src="/uddy-text-pink.png"
+                alt="Uddy"
+                width={120}
+                height={40}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="text-white/70 font-semibold leading-relaxed">
               Simple, effective skincare. Your skin doesn&apos;t need fighting — it
