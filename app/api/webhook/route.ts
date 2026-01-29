@@ -57,7 +57,7 @@ async function handleSuccessfulPayment(session: Stripe.Checkout.Session) {
     : [];
 
   // Send customer confirmation email
-  if (customerEmail) {
+  if (customerEmail && resend) {
     try {
       await resend.emails.send({
         from: "Uddy Skincare <orders@uddyskincare.com>",
@@ -107,7 +107,7 @@ async function handleSuccessfulPayment(session: Stripe.Checkout.Session) {
   }
 
   // Send admin notification
-  try {
+  if (resend) try {
     await resend.emails.send({
       from: "Uddy Orders <orders@uddyskincare.com>",
       to: process.env.ADMIN_EMAIL || "hello@uddyskincare.com",
