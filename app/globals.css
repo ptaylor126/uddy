@@ -49,6 +49,13 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0 !important;
 }
 
+/* Handwritten font for taglines */
+.font-kalam {
+  font-family: var(--font-kalam), cursive !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
 /* ================================
    BRUTALIST UTILITIES
    ================================ */

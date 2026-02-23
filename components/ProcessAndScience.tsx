@@ -41,27 +41,27 @@ export default function ProcessAndScience() {
 
             {/* 4-Column Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {/* 1. GRASS FED */}
+                {/* 1. GRASS FED TALLOW */}
                 <div className="bg-white border-4 border-[#1A1A1A] p-6 shadow-[8px_8px_0px_0px_#1BC496] hover:-translate-y-1 transition-transform">
-                    <motion.img src="/cow-face.png" alt="Cow" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }} />
-                    <h3 className="text-xl font-black uppercase mb-2">Grass Fed</h3>
-                    <p className="text-xs font-bold opacity-80 leading-tight">Sourced from happy cows in the UK.</p>
+                    <motion.img src="/sticker-tallow.png" alt="Grass Fed Tallow" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }} />
+                    <h3 className="text-xl font-black uppercase mb-2">Grass Fed Tallow</h3>
+                    <p className="text-xs font-bold opacity-80 leading-tight">Sourced from grass-fed UK cows. The foundation of every Uddy product.</p>
                 </div>
-                 {/* 2. RAW HONEY */}
+                 {/* 2. JOJOBA OIL */}
                  <div className="bg-white border-4 border-[#1A1A1A] p-6 shadow-[8px_8px_0px_0px_#FF91B6] hover:-translate-y-1 transition-transform">
-                    <motion.img src="/honey.png" alt="Honey" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }} />
-                    <h3 className="text-xl font-black uppercase mb-2">Raw Honey</h3>
-                    <p className="text-xs font-bold opacity-80 leading-tight">Antimicrobial repair straight from the hive.</p>
+                    <motion.img src="/sticker-jojoba.png" alt="Jojoba Oil" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }} />
+                    <h3 className="text-xl font-black uppercase mb-2">Jojoba Oil</h3>
+                    <p className="text-xs font-bold opacity-80 leading-tight">Lightweight and gentle. Helps lock in moisture without clogging pores.</p>
                 </div>
-                 {/* 3. SLOW RENDER */}
+                 {/* 3. OAT OIL */}
                  <div className="bg-white border-4 border-[#1A1A1A] p-6 shadow-[8px_8px_0px_0px_#1BC496] hover:-translate-y-1 transition-transform">
-                    <motion.img src="/bowl.png" alt="Bowl" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }} />
-                    <h3 className="text-xl font-black uppercase mb-2">Slow Render</h3>
-                    <p className="text-xs font-bold opacity-80 leading-tight">Purified gently to keep the vitamins in.</p>
+                    <motion.img src="/sticker-oat.png" alt="Oat Oil" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }} />
+                    <h3 className="text-xl font-black uppercase mb-2">Oat Oil</h3>
+                    <p className="text-xs font-bold opacity-80 leading-tight">Naturally soothing. Calms irritation and softens dry skin.</p>
                 </div>
                  {/* 4. HAND POURED */}
                  <div className="bg-white border-4 border-[#1A1A1A] p-6 shadow-[8px_8px_0px_0px_#FF91B6] hover:-translate-y-1 transition-transform">
-                    <motion.img src="/box.png" alt="Box" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }} />
+                    <motion.img src="/sticker-handpoured.png" alt="Hand Poured" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }} />
                     <h3 className="text-xl font-black uppercase mb-2">Hand Poured</h3>
                     <p className="text-xs font-bold opacity-80 leading-tight">Small batches made by Jack & Hollie.</p>
                 </div>

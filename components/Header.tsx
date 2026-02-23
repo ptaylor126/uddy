@@ -78,13 +78,13 @@ export default function Header() {
 
         {/* CENTER GROUP (Logo - Absolute Center) */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <Link href="/" className="block py-4">
+          <Link href="/" className="block">
             <Image
-              src="/full-logo.png"
+              src="/logo-home-new.svg"
               alt="Uddy"
               width={160}
               height={45}
-              className="h-[68px] md:h-20 w-auto"
+              className="h-[68px] md:h-20 w-auto -mt-[6px] md:-mt-[7px]"
             />
           </Link>
         </div>

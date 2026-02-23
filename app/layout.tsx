@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Pacifico } from "next/font/google";
+import { Montserrat, Pacifico, Kalam } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
 import Header from "@/components/Header";
@@ -16,6 +16,13 @@ const montserrat = Montserrat({
 const pacifico = Pacifico({
   weight: "400",
   variable: "--font-pacifico",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const kalam = Kalam({
+  weight: "400",
+  variable: "--font-kalam",
   subsets: ["latin"],
   display: "swap",
 });
@@ -59,7 +66,7 @@ export default function RootLayout({
         <WebsiteSchema />
       </head>
       <body
-        className={`${montserrat.variable} ${pacifico.variable} antialiased`}
+        className={`${montserrat.variable} ${pacifico.variable} ${kalam.variable} antialiased`}
       >
         <CartProvider>
           <Header />

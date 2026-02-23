@@ -45,14 +45,14 @@ export default function Home() {
           </h1>
 
           <p className="text-lg md:text-xl font-bold mb-10 max-w-md bg-white border-2 border-uddy-black p-4 shadow-hard transform -rotate-1">
-            Skin doesn&apos;t need fighting. It needs feeding. The UK&apos;s finest grass-fed tallow balm.
+            Tallow-based skincare for dry, sensitive and easily irritated skin.
           </p>
 
           <Link
             href="/product/cow-tallow-face-balm"
             className="self-start bg-uddy-green text-uddy-black text-xl md:text-2xl font-black uppercase px-10 py-6 border-4 border-uddy-black shadow-hard-lg hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
           >
-            GET SOME UDDY
+            Try Uddy
           </Link>
         </div>
 
@@ -90,15 +90,130 @@ export default function Home() {
 
           {/* Quote Banner */}
           <div className="absolute bottom-0 left-0 w-full bg-white border-t-4 border-uddy-black p-6 text-center">
-            <p className="font-script text-2xl md:text-3xl text-uddy-pink transform -rotate-1">
-              Jack gave up on his skin. Hollie got cooking.
+            <p className="font-kalam text-2xl md:text-[2.5rem] leading-snug text-uddy-pink transform -rotate-1">
+              Jack gave up on his skin. Hollie<br />got cooking.
             </p>
           </div>
         </div>
       </section>
 
+      {/* SOUND FAMILIAR? SECTION */}
+      <section className="py-20 md:py-24 bg-[#FFFDF5] border-b-4 border-uddy-black">
+        <div className="container mx-auto px-6 max-w-5xl">
+
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] text-uddy-black mb-6">
+              Sound familiar?
+            </h2>
+            <p className="text-xl md:text-2xl font-bold text-uddy-black/80 max-w-2xl mx-auto">
+              Uddy was made for skin that&apos;s had enough<br />of the runaround.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-16">
+            {[
+              { img: "/familiar-dry-skin.png", alt: "Dry skin", text: "Skin that's always dry, no matter what you try" },
+              { img: "/familiar-eczema.png", alt: "Eczema", text: "Eczema that flares up at the worst times" },
+              { img: "/familiar-tightness.png", alt: "Tightness", text: "Tightness after every wash" },
+              { img: "/familiar-psoriasis.png", alt: "Psoriasis", text: "Psoriasis patches you can't shift" },
+              { img: "/familiar-cracked-skin.png", alt: "Cracked skin", text: "Cracked, rough skin on hands and elbows" },
+              { img: "/familiar-reactions.png", alt: "Reactions", text: "Reactions to products that are meant to help" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className={`bg-white border-4 border-uddy-black p-5 font-bold text-uddy-black ${
+                  i % 2 === 0
+                    ? "shadow-[4px_4px_0px_0px_#1BC496]"
+                    : "shadow-[4px_4px_0px_0px_#FF91B6]"
+                } hover:-translate-y-1 transition-transform`}
+              >
+                <div className="w-full aspect-square relative mb-4">
+                  <Image
+                    src={item.img}
+                    alt={item.alt}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <p className="text-sm md:text-base">{item.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <p className="inline-block text-lg md:text-xl font-bold bg-uddy-black text-white px-6 py-3 transform -rotate-1">
+              If your skin&apos;s been through it, Uddy&apos;s a good place to start.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
       {/* PROCESS & SCIENCE SECTION */}
       <ProcessAndScience />
+
+      {/* WHAT MAKES UDDY DIFFERENT? SECTION */}
+      <section className="py-20 md:py-24 bg-uddy-pink border-b-4 border-uddy-black relative overflow-hidden">
+
+        <div
+          className="absolute inset-0 opacity-10 pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#1A1A1A 1.5px, transparent 1.5px)',
+            backgroundSize: '20px 20px'
+          }}
+        ></div>
+
+        <div className="container mx-auto px-6 max-w-5xl relative z-10">
+
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] text-uddy-black mb-4">
+              What makes Uddy different?
+            </h2>
+          </div>
+
+          <div className="flex flex-col gap-6 md:gap-8 mb-16">
+            {[
+              {
+                them: "Most skincare: long ingredient lists full of things you can't pronounce.",
+                us: "Uddy: three ingredients. That's it. Tallow, jojoba oil, oat oil.",
+              },
+              {
+                them: "Most skincare: designed for 'normal' skin, then adapted for sensitive.",
+                us: "Uddy: built for sensitive skin from the start.",
+              },
+              {
+                them: "Most skincare: marketed with promises and buzzwords.",
+                us: "Uddy: made by two people who just wanted something that actually worked.",
+              },
+              {
+                them: "Most skincare: hides behind 'dermatologically tested' and 'clinically proven.'",
+                us: <>Uddy: made in small batches by a husband and wife in the UK. <a href="mailto:hello@uddyskin.com" className="underline">Ask us anything.</a></>,
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-white border-4 border-uddy-black shadow-[6px_6px_0px_0px_#1A1A1A] p-6 md:p-8"
+              >
+                <p className="text-base md:text-lg font-bold italic text-uddy-black/50 mb-3 leading-snug" style={{ textWrap: 'balance' }}>
+                  {item.them}
+                </p>
+                <p className="text-lg md:text-xl font-black text-uddy-black leading-snug" style={{ textWrap: 'balance' }}>
+                  {item.us}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <div className="inline-block bg-white border-4 border-uddy-black px-6 md:px-8 py-4 shadow-[4px_4px_0px_0px_#1A1A1A] transform rotate-1">
+              <p className="text-base md:text-lg font-bold text-uddy-black" style={{ textWrap: 'balance' }}>
+                We&apos;re not trying to replace your whole routine. We just think your skin deserves fewer, better ingredients.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
 
       {/* PICK YOUR POT SECTION */}
       <section className="py-24 bg-uddy-green border-b-4 border-uddy-black relative overflow-hidden">
