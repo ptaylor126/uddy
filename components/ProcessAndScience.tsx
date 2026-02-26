@@ -18,13 +18,13 @@ const popIn = {
 
 export default function ProcessAndScience() {
   return (
-    <section className="bg-[#FFFDF5] border-b-4 border-[#1A1A1A] overflow-hidden">
-
+    <>
       {/* ==============================================
-          PART 1: NO NASTIES (The Process)
+          NO NASTIES SECTION
       =============================================== */}
-      <div className="py-20 border-b-4 border-[#1A1A1A] border-dashed bg-white/50">
-        <div className="container mx-auto px-6">
+      <section className="bg-[#FFFDF5] border-b-4 border-[#1A1A1A] overflow-hidden">
+        <div className="py-20 border-b-0 bg-white/50">
+          <div className="max-w-[1440px] mx-auto px-6">
 
             {/* Header */}
             <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
@@ -55,26 +55,26 @@ export default function ProcessAndScience() {
                 </div>
                  {/* 3. OAT OIL */}
                  <div className="bg-white border-4 border-[#1A1A1A] p-6 shadow-[8px_8px_0px_0px_#1BC496] hover:-translate-y-1 transition-transform">
-                    <motion.img src="/sticker-oat.png" alt="Oat Oil" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }} />
-                    <h3 className="text-xl font-black uppercase mb-2">Oat Oil</h3>
+                    <motion.img src="/sticker-oat.png" alt="Oat Extract Oil" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: 5 }} transition={{ type: "spring", stiffness: 300 }} />
+                    <h3 className="text-xl font-black uppercase mb-2">Oat Extract Oil</h3>
                     <p className="text-xs font-bold opacity-80 leading-tight">Naturally soothing. Calms irritation and softens dry skin.</p>
                 </div>
-                 {/* 4. HAND POURED */}
+                 {/* 4. ESSENTIAL OILS */}
                  <div className="bg-white border-4 border-[#1A1A1A] p-6 shadow-[8px_8px_0px_0px_#FF91B6] hover:-translate-y-1 transition-transform">
-                    <motion.img src="/sticker-handpoured.png" alt="Hand Poured" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }} />
-                    <h3 className="text-xl font-black uppercase mb-2">Hand Poured</h3>
-                    <p className="text-xs font-bold opacity-80 leading-tight">Small batches made by Jack & Hollie.</p>
+                    <motion.img src="/illustrations/sticker-essentialoils.png" alt="Essential Oils" className="w-32 h-32 object-contain mb-1 mx-auto" whileHover={{ scale: 1.15, rotate: -5 }} transition={{ type: "spring", stiffness: 300 }} />
+                    <h3 className="text-xl font-black uppercase mb-2">Essential Oils</h3>
+                    <p className="text-xs font-bold opacity-80 leading-tight">A drop of lavender. Just enough to calm the skin and the senses.</p>
                 </div>
             </div>
+          </div>
         </div>
-      </div>
-
+      </section>
 
       {/* ==============================================
-          PART 2: THE SCIENCE (Animated)
+          WHY TALLOW? SECTION
       =============================================== */}
-      <div className="py-24">
-        <div className="container mx-auto px-6 text-center mb-20">
+      <section className="py-24 bg-[#FFFDF5] border-b-4 border-[#1A1A1A] overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-6 text-center mb-20">
             <span className="font-script text-3xl text-[#FF91B6] relative block mb-4 transform -rotate-2">
                 The juicy details...
             </span>
@@ -83,7 +83,7 @@ export default function ProcessAndScience() {
             </h2>
         </div>
 
-        <div className="container mx-auto px-6 max-w-6xl flex flex-col gap-32">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col gap-32">
 
             {/* BLOCK 1: CELL */}
             <motion.div
@@ -146,8 +146,7 @@ export default function ProcessAndScience() {
             </motion.div>
 
         </div>
-      </div>
-
-    </section>
+      </section>
+    </>
   );
 }

@@ -2,9 +2,35 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { useCart } from "@/components/CartProvider";
 import ProcessAndScience from "@/components/ProcessAndScience";
 import { PRODUCT, formatPrice, formatPriceShort } from "@/lib/utils";
+
+/* ─── Animated count-up number ─── */
+function CountUp({ target, prefix = "", suffix = "", duration = 1.5, className }: {
+  target: number; prefix?: string; suffix?: string; duration?: number; className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.5 });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const start = performance.now();
+    const step = (now: number) => {
+      const elapsed = Math.min((now - start) / (duration * 1000), 1);
+      // ease-out curve
+      const eased = 1 - Math.pow(1 - elapsed, 3);
+      setDisplay(Math.round(eased * target));
+      if (elapsed < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [inView, target, duration]);
+
+  return <span ref={ref} className={className}>{prefix}{display.toLocaleString()}{suffix}</span>;
+}
 
 export default function Home() {
   const { addItem } = useCart();
@@ -30,130 +56,128 @@ export default function Home() {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="flex flex-col md:flex-row min-h-[85vh] border-b-4 border-uddy-black">
+      <section
+        className="border-b-4 border-uddy-black bg-uddy-pink"
+      >
+        <div className="flex flex-col md:flex-row min-h-[85vh]">
 
-        {/* Left Side - Pink */}
-        <div className="w-full md:w-1/2 bg-uddy-pink p-10 md:p-20 flex flex-col justify-center relative border-b-4 md:border-b-0 md:border-r-4 border-uddy-black">
+          {/* Left Side - Pink (capped width, content stays readable) */}
+          <div className="w-full md:w-[580px] md:shrink-0 p-10 md:p-20 flex flex-col justify-center relative border-b-4 md:border-b-0 md:border-r-4 border-uddy-black">
 
-          {/* Floating Sticker */}
-          <div className="absolute top-16 right-6 md:top-24 md:right-12 w-32 h-32 bg-uddy-yellow border-4 border-uddy-black rounded-full flex items-center justify-center text-center font-black -rotate-[20deg] shadow-hard z-10 animate-bounce" style={{ animationDuration: '1.5s' }}>
-            <span className="text-sm leading-tight text-uddy-black">THE<br/>O.G. SKIN<br/>FOOD</span>
+            {/* Floating Sticker */}
+            <div className="absolute top-16 right-6 md:top-24 md:right-12 w-32 h-32 bg-uddy-yellow border-4 border-uddy-black rounded-full flex items-center justify-center text-center font-black -rotate-[20deg] shadow-hard z-10 animate-bounce" style={{ animationDuration: '1.5s' }}>
+              <span className="text-sm leading-tight text-uddy-black">THE<br/>O.G. SKIN<br/>FOOD</span>
+            </div>
+
+            <h1 className="text-7xl md:text-9xl font-black leading-[0.85] mb-8 text-white drop-shadow-[6px_6px_0px_#1A1A1A]">
+              FEED <br/> YOUR <br/> FACE.
+            </h1>
+
+            <p className="text-lg md:text-xl font-bold mb-10 max-w-md bg-white border-2 border-uddy-black p-4 shadow-hard transform -rotate-1">
+              Tallow-based skincare for dry, sensitive and easily irritated skin.
+            </p>
+
+            <Link
+              href="/product/cow-tallow-face-balm"
+              className="self-start bg-uddy-green text-uddy-black text-xl md:text-2xl font-black uppercase px-10 py-6 border-4 border-uddy-black shadow-hard-lg hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+            >
+              Try Uddy
+            </Link>
           </div>
 
-          <h1 className="text-7xl md:text-9xl font-black leading-[0.85] mb-8 text-white drop-shadow-[6px_6px_0px_#1A1A1A]">
-            FEED <br/> YOUR <br/> FACE.
-          </h1>
+          {/* Right Side - Image (fills remaining space) */}
+          <div className="w-full md:flex-1 bg-gray-100 relative group overflow-hidden min-h-[400px] md:min-h-0">
+            <Image
+              src="/promo-1.jpg"
+              alt="Uddy Girl"
+              fill
+              className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+              priority
+            />
 
-          <p className="text-lg md:text-xl font-bold mb-10 max-w-md bg-white border-2 border-uddy-black p-4 shadow-hard transform -rotate-1">
-            Tallow-based skincare for dry, sensitive and easily irritated skin.
-          </p>
-
-          <Link
-            href="/product/cow-tallow-face-balm"
-            className="self-start bg-uddy-green text-uddy-black text-xl md:text-2xl font-black uppercase px-10 py-6 border-4 border-uddy-black shadow-hard-lg hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
-          >
-            Try Uddy
-          </Link>
-        </div>
-
-        {/* Right Side - Image */}
-        <div className="w-full md:w-1/2 bg-gray-100 relative group overflow-hidden min-h-[400px] md:min-h-0">
-          <Image
-            src="/promo-1.jpg"
-            alt="Uddy Girl"
-            fill
-            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-            priority
-          />
-
-          {/* Hover Product Label */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 z-10">
-            <div className="bg-white border-3 border-uddy-black p-4 shadow-hard text-center">
-              <p className="text-xs font-black uppercase tracking-widest text-uddy-green mb-1">Cow Tallow Balm</p>
-              <p className="text-2xl font-black mb-3">{formatPrice(PRODUCT.price)}</p>
-              <div className="flex flex-col gap-2">
-                <button
-                  onClick={handleAddGreen}
-                  className="bg-uddy-black text-white font-black uppercase text-xs px-4 py-2 hover:bg-uddy-green hover:text-uddy-black transition-colors border-2 border-uddy-black"
-                >
-                  Add to Cart
-                </button>
-                <Link
-                  href="/product/cow-tallow-face-balm"
-                  className="text-[10px] font-bold uppercase underline hover:text-uddy-pink"
-                >
-                  View Product →
-                </Link>
+            {/* Hover Product Label */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 z-10">
+              <div className="bg-white border-3 border-uddy-black p-4 shadow-hard text-center">
+                <p className="text-xs font-black uppercase tracking-widest text-uddy-green mb-1">Cow Tallow Balm</p>
+                <p className="text-2xl font-black mb-3">{formatPrice(PRODUCT.price)}</p>
+                <div className="flex flex-col gap-2">
+                  <button
+                    onClick={handleAddGreen}
+                    className="bg-uddy-black text-white font-black uppercase text-xs px-4 py-2 hover:bg-uddy-green hover:text-uddy-black transition-colors border-2 border-uddy-black"
+                  >
+                    Add to Cart
+                  </button>
+                  <Link
+                    href="/product/cow-tallow-face-balm"
+                    className="text-[10px] font-bold uppercase underline hover:text-uddy-pink"
+                  >
+                    View Product →
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Quote Banner */}
-          <div className="absolute bottom-0 left-0 w-full bg-white border-t-4 border-uddy-black p-6 text-center">
-            <p className="font-kalam text-2xl md:text-[2.5rem] leading-snug text-uddy-pink transform -rotate-1">
-              Jack gave up on his skin. Hollie<br />got cooking.
-            </p>
+            {/* Quote Banner */}
+            <div className="absolute bottom-0 left-0 w-full bg-white border-t-4 border-uddy-black p-6 text-center">
+              <p className="font-kalam text-2xl md:text-[2.5rem] leading-snug text-uddy-pink transform -rotate-1">
+                Jack gave up on his skin. Hollie<br />got cooking.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* SOUND FAMILIAR? SECTION */}
       <section className="py-20 md:py-24 bg-[#FFFDF5] border-b-4 border-uddy-black">
-        <div className="container mx-auto px-6 max-w-5xl">
+        <div className="max-w-[1440px] mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
 
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] text-uddy-black mb-6">
-              Sound familiar?
-            </h2>
-            <p className="text-xl md:text-2xl font-bold text-uddy-black/80 max-w-2xl mx-auto">
-              Uddy was made for skin that&apos;s had enough<br />of the runaround.
-            </p>
-          </div>
+            <div className="text-center mb-16">
+              <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] text-uddy-black mb-6">
+                Sound familiar?
+              </h2>
+              <p className="text-xl md:text-2xl font-bold text-uddy-black/80 max-w-2xl mx-auto">
+                Uddy was made for skin that&apos;s had enough<br />of the runaround.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-16">
-            {[
-              { img: "/familiar-dry-skin.png", alt: "Dry skin", text: "Skin that's always dry, no matter what you try" },
-              { img: "/familiar-eczema.png", alt: "Eczema", text: "Eczema that flares up at the worst times" },
-              { img: "/familiar-tightness.png", alt: "Tightness", text: "Tightness after every wash" },
-              { img: "/familiar-psoriasis.png", alt: "Psoriasis", text: "Psoriasis patches you can't shift" },
-              { img: "/familiar-cracked-skin.png", alt: "Cracked skin", text: "Cracked, rough skin on hands and elbows" },
-              { img: "/familiar-reactions.png", alt: "Reactions", text: "Reactions to products that are meant to help" },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className={`bg-white border-4 border-uddy-black p-5 font-bold text-uddy-black ${
-                  i % 2 === 0
-                    ? "shadow-[4px_4px_0px_0px_#1BC496]"
-                    : "shadow-[4px_4px_0px_0px_#FF91B6]"
-                } hover:-translate-y-1 transition-transform`}
-              >
-                <div className="w-full aspect-square relative mb-4">
-                  <Image
-                    src={item.img}
-                    alt={item.alt}
-                    fill
-                    className="object-contain"
-                  />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-16">
+              {[
+                "Skin that's always dry, no matter what you try",
+                "Eczema that flares up at the worst times",
+                "Tightness after every wash",
+                "Psoriasis patches you can't shift",
+                "Cracked, rough skin on hands and elbows",
+                "Reactions to products that are meant to help",
+              ].map((text, i) => (
+                <div
+                  key={i}
+                  className={`bg-white border-4 border-uddy-black px-6 py-5 font-bold text-uddy-black text-base md:text-lg ${
+                    i % 2 === 0
+                      ? "shadow-[4px_4px_0px_0px_#1BC496]"
+                      : "shadow-[4px_4px_0px_0px_#FF91B6]"
+                  } hover:-translate-y-1 transition-transform`}
+                >
+                  {text}
                 </div>
-                <p className="text-sm md:text-base">{item.text}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-          <div className="text-center">
-            <p className="inline-block text-lg md:text-xl font-bold bg-uddy-black text-white px-6 py-3 transform -rotate-1">
-              If your skin&apos;s been through it, Uddy&apos;s a good place to start.
-            </p>
-          </div>
+            <div className="text-center">
+              <p className="inline-block text-lg md:text-xl font-bold bg-uddy-black text-white px-6 py-3 transform -rotate-1">
+                If your skin&apos;s been through it, Uddy&apos;s a good place to start.
+              </p>
+            </div>
 
+          </div>
         </div>
       </section>
 
       {/* PROCESS & SCIENCE SECTION */}
       <ProcessAndScience />
 
-      {/* WHAT MAKES UDDY DIFFERENT? SECTION */}
-      <section className="py-20 md:py-24 bg-uddy-pink border-b-4 border-uddy-black relative overflow-hidden">
+      {/* WHY UDDY? SECTION */}
+      <section className="py-20 md:py-28 bg-uddy-pink border-b-4 border-uddy-black relative overflow-hidden">
 
         <div
           className="absolute inset-0 opacity-10 pointer-events-none"
@@ -163,55 +187,157 @@ export default function Home() {
           }}
         ></div>
 
-        <div className="container mx-auto px-6 max-w-5xl relative z-10">
+        <div className="max-w-[1440px] mx-auto px-6 relative z-10">
+          <div className="max-w-4xl mx-auto">
 
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] text-uddy-black mb-4">
-              What makes Uddy different?
-            </h2>
-          </div>
+            <div className="text-center mb-20">
+              <h2 className="text-5xl md:text-7xl font-black uppercase leading-[0.9] text-uddy-black mb-4">
+                Why Uddy?
+              </h2>
+            </div>
 
-          <div className="flex flex-col gap-6 md:gap-8 mb-16">
-            {[
-              {
-                them: "Most skincare: long ingredient lists full of things you can't pronounce.",
-                us: "Uddy: three ingredients. That's it. Tallow, jojoba oil, oat oil.",
-              },
-              {
-                them: "Most skincare: designed for 'normal' skin, then adapted for sensitive.",
-                us: "Uddy: built for sensitive skin from the start.",
-              },
-              {
-                them: "Most skincare: marketed with promises and buzzwords.",
-                us: "Uddy: made by two people who just wanted something that actually worked.",
-              },
-              {
-                them: "Most skincare: hides behind 'dermatologically tested' and 'clinically proven.'",
-                us: <>Uddy: made in small batches by a husband and wife in the UK. <a href="mailto:hello@uddyskin.com" className="underline">Ask us anything.</a></>,
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-white border-4 border-uddy-black shadow-[6px_6px_0px_0px_#1A1A1A] p-6 md:p-8"
+            <div className="flex flex-col gap-16 md:gap-20 mb-20">
+
+              {/* POINT 1 — JOJOBA OIL */}
+              <motion.div
+                className="bg-white border-4 border-uddy-black shadow-[8px_8px_0px_0px_#1A1A1A] p-8 md:p-12"
+                initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}
+                variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
               >
-                <p className="text-base md:text-lg font-bold italic text-uddy-black/50 mb-3 leading-snug" style={{ textWrap: 'balance' }}>
-                  {item.them}
+                <span className="text-6xl md:text-8xl font-black text-uddy-green/20 leading-none block mb-4">01</span>
+                <h3 className="text-3xl md:text-4xl font-black uppercase mb-6 text-uddy-black">Jojoba Oil</h3>
+                <p className="text-base md:text-lg font-bold italic text-uddy-black/50 mb-6 leading-snug">
+                  &ldquo;Most tallow balms use almond oil or coconut oil as their carrier.&rdquo;
                 </p>
-                <p className="text-lg md:text-xl font-black text-uddy-black leading-snug" style={{ textWrap: 'balance' }}>
-                  {item.us}
+
+                {/* Stat: 97% molecular match */}
+                <motion.div
+                  className="mb-6"
+                  variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+                >
+                  <div className="border-4 border-uddy-black p-5 md:p-6">
+                    <div className="flex items-end gap-4 mb-3">
+                      <span className="text-5xl md:text-6xl font-black text-uddy-green leading-none">97%</span>
+                      <span className="text-sm font-bold uppercase tracking-wider text-uddy-black/60 pb-1">molecular match to human sebum</span>
+                    </div>
+                    <div className="w-full h-4 bg-uddy-black/10 border-2 border-uddy-black">
+                      <motion.div
+                        className="h-full bg-uddy-green"
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "97%" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+
+                <p className="text-lg md:text-xl font-bold text-uddy-black leading-relaxed">
+                  Your skin absorbs jojoba instantly. It&apos;s not a nut. It&apos;s not an oil. It&apos;s a seed wax — the closest thing in nature to what your skin already produces. Won&apos;t clog pores, won&apos;t trigger nut allergies, won&apos;t go rancid.
+                </p>
+              </motion.div>
+
+              {/* POINT 2 — OAT OIL EXTRACT */}
+              <motion.div
+                className="bg-white border-4 border-uddy-black shadow-[8px_8px_0px_0px_#1A1A1A] p-8 md:p-12"
+                initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}
+                variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
+              >
+                <span className="text-6xl md:text-8xl font-black text-uddy-pink/30 leading-none block mb-4">02</span>
+                <h3 className="text-3xl md:text-4xl font-black uppercase mb-6 text-uddy-black">Oat Oil Extract</h3>
+                <p className="text-base md:text-lg font-bold italic text-uddy-black/50 mb-6 leading-snug">
+                  &ldquo;Most tallow balms add long ingredient lists to cover all bases.&rdquo;
+                </p>
+
+                {/* Stats row */}
+                <motion.div
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6"
+                  variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+                >
+                  <div className="border-4 border-uddy-black border-l-8 border-l-uddy-green p-5">
+                    <CountUp target={30} prefix="↓" suffix="%" className="text-5xl md:text-6xl font-black text-uddy-green leading-none block" />
+                    <span className="text-sm font-bold uppercase tracking-wider text-uddy-black/60 mt-1 block">skin inflammation</span>
+                  </div>
+                  <div className="border-4 border-uddy-black border-l-8 border-l-uddy-pink p-5">
+                    <CountUp target={4000} className="text-5xl md:text-6xl font-black text-uddy-pink leading-none block" />
+                    <span className="text-sm font-bold uppercase tracking-wider text-uddy-black/60 mt-1 block">years of use on skin</span>
+                  </div>
+                </motion.div>
+
+                {/* Active compounds pills */}
+                <motion.div
+                  className="flex flex-wrap gap-2 mb-6"
+                  variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+                >
+                  {["Avenanthramides", "Ceramides", "Beta-Glucans"].map((compound) => (
+                    <span key={compound} className="bg-uddy-black text-white text-xs font-bold uppercase tracking-wider px-4 py-2">
+                      {compound}
+                    </span>
+                  ))}
+                </motion.div>
+
+                <p className="text-lg md:text-xl font-bold text-uddy-black leading-relaxed">
+                  One ingredient that does the work of many. Anti-inflammatory compounds found only in oats, plus ceramides that repair your skin barrier. The FDA classifies colloidal oatmeal as a skin protectant.
+                </p>
+              </motion.div>
+
+              {/* POINT 3 — NUT FREE */}
+              <motion.div
+                className="bg-white border-4 border-uddy-black shadow-[8px_8px_0px_0px_#1A1A1A] p-8 md:p-12"
+                initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}
+                variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.15 } } }}
+              >
+                <span className="text-6xl md:text-8xl font-black text-uddy-green/20 leading-none block mb-4">03</span>
+                <h3 className="text-3xl md:text-4xl font-black uppercase mb-6 text-uddy-black">Nut Free</h3>
+                <p className="text-base md:text-lg font-bold italic text-uddy-black/50 mb-6 leading-snug">
+                  &ldquo;Most natural skincare is full of almond oil, shea butter, and coconut derivatives.&rdquo;
+                </p>
+
+                {/* Stat + checklist */}
+                <motion.div
+                  className="flex flex-col sm:flex-row gap-4 mb-6"
+                  variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+                >
+                  {/* Big number with pulse animation */}
+                  <div className="border-4 border-uddy-black border-l-8 border-l-uddy-green p-5 sm:w-auto flex-shrink-0 text-center sm:text-left">
+                    <motion.span
+                      className="text-6xl md:text-7xl font-black text-uddy-green leading-none block inline-block origin-center"
+                      initial={{ scale: 1 }}
+                      whileInView={{ scale: [1, 1.4, 1] }}
+                      viewport={{ once: true, amount: 0.5 }}
+                      transition={{ duration: 0.8, times: [0, 0.4, 1], ease: "easeInOut" as const }}
+                    >
+                      3
+                    </motion.span>
+                    <span className="text-sm font-bold uppercase tracking-wider text-uddy-black/60 mt-1 block">ingredients, all safe</span>
+                  </div>
+
+                  {/* Crossed-out items */}
+                  <div className="border-4 border-uddy-black p-5 flex-1 flex flex-wrap items-center gap-3">
+                    {["Almonds", "Shea", "Tree Nuts"].map((item) => (
+                      <span key={item} className="inline-flex items-center gap-2 bg-uddy-black/5 border-2 border-uddy-black/20 px-4 py-2 text-sm font-bold text-uddy-black/40 line-through decoration-uddy-pink decoration-3">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+
+                <p className="text-lg md:text-xl font-bold text-uddy-black leading-relaxed">
+                  There&apos;s no regulation requiring brands to label nut allergens in cosmetics the way they do in food. Every Uddy product is completely nut free. Three ingredients, all safe.
+                </p>
+              </motion.div>
+
+            </div>
+
+            <div className="text-center">
+              <div className="inline-block bg-white border-4 border-uddy-black px-6 md:px-8 py-4 shadow-[4px_4px_0px_0px_#1A1A1A] transform rotate-1">
+                <p className="text-base md:text-lg font-bold text-uddy-black" style={{ textWrap: 'balance' }}>
+                  We&apos;re not trying to replace your whole routine. We just think your skin deserves fewer, better ingredients.
                 </p>
               </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <div className="inline-block bg-white border-4 border-uddy-black px-6 md:px-8 py-4 shadow-[4px_4px_0px_0px_#1A1A1A] transform rotate-1">
-              <p className="text-base md:text-lg font-bold text-uddy-black" style={{ textWrap: 'balance' }}>
-                We&apos;re not trying to replace your whole routine. We just think your skin deserves fewer, better ingredients.
-              </p>
             </div>
-          </div>
 
+          </div>
         </div>
       </section>
 
@@ -227,7 +353,7 @@ export default function Home() {
           }}
         ></div>
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-[1440px] mx-auto px-6 relative z-10">
 
           {/* Headline & Subtitle */}
           <div className="text-center mb-20">
@@ -325,8 +451,9 @@ export default function Home() {
       </section>
 
       {/* STORY SECTION */}
-      <section className="flex flex-col md:flex-row min-h-[500px] bg-uddy-black text-white">
-        <div className="w-full md:w-1/2 relative border-b-4 md:border-b-0 md:border-r-4 border-white/20 min-h-[300px]">
+      <section className="bg-uddy-black text-white">
+        <div className="flex flex-col md:flex-row min-h-[500px]">
+        <div className="w-full md:flex-1 relative border-b-4 md:border-b-0 md:border-r-4 border-white/20 min-h-[300px]">
           <Image
             src="/promo-6.jpg"
             alt="Founders"
@@ -334,7 +461,7 @@ export default function Home() {
             className="object-cover grayscale opacity-80"
           />
         </div>
-        <div className="w-full md:w-1/2 p-12 md:p-20 flex flex-col justify-center">
+        <div className="w-full md:w-[580px] md:shrink-0 p-12 md:p-20 flex flex-col justify-center">
           <h2 className="text-4xl md:text-5xl font-black uppercase mb-6 leading-tight">
             &quot;Uddy comes from our son, who couldn&apos;t say Daddy.&quot;
           </h2>
@@ -347,6 +474,7 @@ export default function Home() {
           >
             Read the full story →
           </Link>
+        </div>
         </div>
       </section>
     </>
