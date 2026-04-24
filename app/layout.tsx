@@ -59,6 +59,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const prelaunchMode = process.env.NEXT_PUBLIC_PRELAUNCH_MODE === 'true';
+
   return (
     <html lang="en">
       <head>
@@ -69,9 +71,9 @@ export default function RootLayout({
         className={`${montserrat.variable} ${pacifico.variable} ${kalam.variable} antialiased`}
       >
         <CartProvider>
-          <Header />
+          {!prelaunchMode && <Header />}
           <main className="min-h-screen">{children}</main>
-          <Footer />
+          {!prelaunchMode && <Footer />}
         </CartProvider>
       </body>
     </html>
