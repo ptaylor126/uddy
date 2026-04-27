@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Pacifico, Kalam } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
 import Header from "@/components/Header";
@@ -54,12 +55,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+// Routes that render without the global header/footer/marquee.
+const CHROMELESS_PATHS = ['/prelaunch', '/confirmed'];
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const prelaunchMode = process.env.NEXT_PUBLIC_PRELAUNCH_MODE === 'true';
+  const heads = await headers();
+  const pathname = heads.get('x-pathname') ?? '';
+  const chromeless = CHROMELESS_PATHS.includes(pathname);
 
   return (
     <html lang="en">
@@ -71,9 +77,9 @@ export default function RootLayout({
         className={`${montserrat.variable} ${pacifico.variable} ${kalam.variable} antialiased`}
       >
         <CartProvider>
-          {!prelaunchMode && <Header />}
+          {!chromeless && <Header />}
           <main className="min-h-screen">{children}</main>
-          {!prelaunchMode && <Footer />}
+          {!chromeless && <Footer />}
         </CartProvider>
       </body>
     </html>
