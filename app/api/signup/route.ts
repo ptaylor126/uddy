@@ -6,8 +6,26 @@ import { sendConfirmationEmail } from '@/lib/email';
 // Basic email regex. Good enough for form validation; the confirmation click is what really proves the address.
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function envCheck() {
+  const required = [
+    'NEXT_PUBLIC_SUPABASE_URL',
+    'SUPABASE_SERVICE_ROLE_KEY',
+    'RESEND_API_KEY',
+    'EMAIL_FROM',
+    'NEXT_PUBLIC_BASE_URL',
+  ];
+  const missing = required.filter((k) => !process.env[k]);
+  return missing.length ? missing : null;
+}
+
 export async function POST(request: NextRequest) {
   try {
+    const missing = envCheck();
+    if (missing) {
+      console.error('[signup] Missing env vars:', missing.join(', '));
+      return NextResponse.json({ error: 'Server is misconfigured. Please try again later.' }, { status: 500 });
+    }
+
     const body = await request.json().catch(() => ({}));
     const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
     const source = typeof body.source === 'string' ? body.source.slice(0, 64) : 'landing';
@@ -16,27 +34,34 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
     }
 
-    // Check if this email already exists
-    const { data: existing } = await supabaseAdmin
+    const { data: existing, error: selectError } = await supabaseAdmin
       .from('signups')
       .select('id, status')
       .eq('email', email)
       .maybeSingle();
+
+    if (selectError) {
+      console.error('[signup] Supabase select error:', JSON.stringify(selectError, null, 2));
+      return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
+    }
 
     if (existing?.status === 'confirmed') {
       // Already on the list. Don't leak that fact loudly, but don't resend either.
       return NextResponse.json({ ok: true, alreadyConfirmed: true });
     }
 
-    // Generate a new token (URL-safe)
     const token = randomBytes(32).toString('base64url');
 
     if (existing) {
-      // Pending row exists. Refresh the token and resend.
-      await supabaseAdmin
+      const { error: updateError } = await supabaseAdmin
         .from('signups')
         .update({ confirmation_token: token, created_at: new Date().toISOString() })
         .eq('id', existing.id);
+
+      if (updateError) {
+        console.error('[signup] Supabase update error:', JSON.stringify(updateError, null, 2));
+        return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
+      }
     } else {
       const { error: insertError } = await supabaseAdmin.from('signups').insert({
         email,
@@ -46,22 +71,21 @@ export async function POST(request: NextRequest) {
       });
 
       if (insertError) {
-        console.error('Signup insert error:', insertError);
+        console.error('[signup] Supabase insert error:', JSON.stringify(insertError, null, 2));
         return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
       }
     }
 
-    // Send the confirmation email
     const result = await sendConfirmationEmail(email, token);
 
     if (result.error) {
-      console.error('Resend error:', result.error);
+      console.error('[signup] Resend error:', JSON.stringify(result.error, null, 2));
       return NextResponse.json({ error: "Couldn't send the confirmation email. Please try again." }, { status: 500 });
     }
 
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error('Signup handler error:', err);
+    console.error('[signup] Unhandled error:', err instanceof Error ? `${err.name}: ${err.message}\n${err.stack}` : err);
     return NextResponse.json({ error: 'Something went wrong.' }, { status: 500 });
   }
 }
