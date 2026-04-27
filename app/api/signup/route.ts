@@ -34,6 +34,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
     }
 
+    const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? '';
+    console.log('[signup] DEBUG supabase config', {
+      url: process.env.NEXT_PUBLIC_SUPABASE_URL,
+      keyPrefix: serviceKey.slice(0, 10),
+      keyLength: serviceKey.length,
+    });
+
     const { data: existing, error: selectError } = await supabaseAdmin
       .from('signups')
       .select('id, status')
