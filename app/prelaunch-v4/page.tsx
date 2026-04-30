@@ -13,7 +13,6 @@ export default function Prelaunch() {
         {/* LEFT PANEL */}
         <div className="left-panel">
           <div className="content-wrapper">
-            {/* MASSIVE BLACK LOGO TEXT */}
             <h1 className="logo-text">UDDY</h1>
 
             <div className="copy-block">
@@ -47,10 +46,10 @@ export default function Prelaunch() {
 
               {/* Top Left Star & Arrow */}
               <div className="doodle doodle-group-tl">
-                <svg viewBox="0 0 100 100" className="doodle-icon">
+                <svg viewBox="0 0 100 100" className="doodle-icon doodle-star">
                   <path d="M50,10 L60,35 L90,25 L70,50 L90,75 L60,65 L50,90 L40,65 L10,75 L30,50 L10,25 L40,35 Z" fill="none" stroke="#000" strokeWidth="4" strokeLinejoin="miter"/>
                 </svg>
-                <svg viewBox="0 0 100 100" className="doodle-icon arrow-offset">
+                <svg viewBox="0 0 100 100" className="doodle-icon doodle-arrow-tl">
                   <path d="M20,20 Q60,10 80,70" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round"/>
                   <path d="M60,60 L80,70 L75,45" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -58,10 +57,10 @@ export default function Prelaunch() {
 
               {/* Top Right Star & Arrow */}
               <div className="doodle doodle-group-tr">
-                <svg viewBox="0 0 100 100" className="doodle-icon">
+                <svg viewBox="0 0 100 100" className="doodle-icon doodle-star">
                   <path d="M50,10 L60,35 L90,25 L70,50 L90,75 L60,65 L50,90 L40,65 L10,75 L30,50 L10,25 L40,35 Z" fill="none" stroke="#000" strokeWidth="4" strokeLinejoin="miter"/>
                 </svg>
-                <svg viewBox="0 0 100 100" className="doodle-icon arrow-offset-rt">
+                <svg viewBox="0 0 100 100" className="doodle-icon doodle-arrow-tr">
                   <path d="M80,20 Q40,10 20,70" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round"/>
                   <path d="M40,60 L20,70 L25,45" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -128,6 +127,7 @@ export default function Prelaunch() {
           min-height: 100vh;
           width: 100vw;
           position: relative;
+          overflow: hidden;
         }
 
         /* DECORATIVE LEFT STRIPS */
@@ -152,30 +152,27 @@ export default function Prelaunch() {
 
         /* LEFT PANEL */
         .left-panel {
-          flex: 1;
+          flex: 0 0 50%; /* Force strict 50% split */
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: 4rem 4rem 4rem 6rem; /* Extra left padding for strips */
+          padding: 4rem 4rem 4rem 5rem;
           background-color: #F4F4F0;
           z-index: 2;
         }
 
         .content-wrapper {
-          max-width: 650px;
           width: 100%;
+          max-width: 600px;
         }
 
         .logo-text {
-          font-size: clamp(8rem, 18vw, 15rem);
+          font-size: 11vw; /* Scales cleanly to fit within 50vw panel */
           font-weight: 900;
           letter-spacing: -0.06em;
-          line-height: 0.75;
+          line-height: 0.8;
           margin-bottom: 2rem;
           color: #000;
-          transform: scaleY(1.3);
-          transform-origin: left top;
-          margin-top: 2rem;
         }
 
         .copy-block h2 {
@@ -198,7 +195,7 @@ export default function Prelaunch() {
           display: flex;
           flex-direction: column;
           gap: 1.2rem;
-          max-width: 550px;
+          width: 100%;
         }
 
         .signup-form input {
@@ -227,14 +224,13 @@ export default function Prelaunch() {
 
         /* RIGHT PANEL */
         .right-panel {
-          flex: 1;
+          flex: 0 0 50%; /* Force strict 50% split */
           position: relative;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
           background-color: #F4F4F0;
-          overflow: hidden;
           padding: 2rem;
         }
 
@@ -246,7 +242,7 @@ export default function Prelaunch() {
           width: 60%;
           height: 100%;
           background-color: #F38AB6;
-          clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
+          clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
           z-index: 0;
         }
 
@@ -255,9 +251,9 @@ export default function Prelaunch() {
           right: 0;
           bottom: 0;
           width: 50%;
-          height: 40%;
+          height: 45%;
           background-color: #00A887;
-          clip-path: polygon(0 100%, 100% 0, 100% 100%);
+          clip-path: polygon(100% 30%, 0 100%, 100% 100%);
           z-index: 0;
         }
 
@@ -269,13 +265,13 @@ export default function Prelaunch() {
           flex-direction: column;
           align-items: center;
           width: 100%;
-          max-width: 500px;
+          max-width: 480px;
         }
 
         .image-wrapper {
           position: relative;
-          width: 80%;
-          margin-bottom: 2rem;
+          width: 65%; /* Leaves room for doodles to overflow */
+          margin-bottom: 3rem;
         }
 
         .product-image {
@@ -286,7 +282,7 @@ export default function Prelaunch() {
           z-index: 1;
         }
 
-        /* DOODLES */
+        /* DOODLES (Locked strictly via percentages) */
         .doodle {
           position: absolute;
           z-index: 3;
@@ -294,47 +290,49 @@ export default function Prelaunch() {
         }
 
         .doodle-frame {
-          top: -15px;
-          left: -15px;
-          width: calc(100% + 30px);
-          height: calc(100% + 30px);
-        }
-
-        .doodle-icon {
-          width: 80px;
-          height: 80px;
-          position: absolute;
+          top: -5%;
+          left: -5%;
+          width: 110%;
+          height: 110%;
         }
 
         .doodle-group-tl {
-          top: -40px;
-          left: -100px;
-          width: 100px;
-          height: 100px;
+          top: -15%;
+          left: -35%;
+          width: 45%;
+          aspect-ratio: 1;
         }
-        .arrow-offset { top: 40px; left: 40px; width: 60px; height: 60px; }
 
         .doodle-group-tr {
-          top: -60px;
-          right: -90px;
-          width: 100px;
-          height: 100px;
+          top: -20%;
+          right: -30%;
+          width: 45%;
+          aspect-ratio: 1;
         }
-        .arrow-offset-rt { top: 50px; left: -30px; width: 60px; height: 60px; }
 
         .doodle-group-bl {
-          bottom: -30px;
-          left: -80px;
-          width: 80px;
-          height: 80px;
+          bottom: -15%;
+          left: -20%;
+          width: 30%;
+          aspect-ratio: 1;
         }
 
         .doodle-group-br {
-          bottom: -40px;
-          right: -70px;
-          width: 80px;
-          height: 80px;
+          bottom: -15%;
+          right: -25%;
+          width: 30%;
+          aspect-ratio: 1;
         }
+
+        .doodle-icon {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+
+        .doodle-star { top: 0; left: 0; width: 80%; height: 80%; }
+        .doodle-arrow-tl { top: 30%; left: 40%; width: 60%; height: 60%; }
+        .doodle-arrow-tr { top: 30%; right: 40%; width: 60%; height: 60%; left: auto; }
 
         /* BOTTOM ICON CARDS */
         .icon-row {
@@ -368,10 +366,10 @@ export default function Prelaunch() {
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
-          .layout-container { flex-direction: column; }
-          .left-panel { padding: 4rem 2rem 4rem 3rem; }
-          .logo-text { transform: scaleY(1); }
-          .right-panel { padding: 4rem 2rem; }
+          .layout-container { flex-direction: column; overflow-y: auto; }
+          .left-panel { flex: none; width: 100%; padding: 4rem 2rem 4rem 3rem; }
+          .logo-text { font-size: 25vw; }
+          .right-panel { flex: none; width: 100%; padding: 4rem 2rem; }
           .bg-shape-pink { width: 100%; clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%); }
           .bg-shape-teal { width: 100%; height: 30%; clip-path: polygon(0 100%, 100% 0, 100% 100%); }
         }
