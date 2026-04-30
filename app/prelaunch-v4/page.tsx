@@ -360,8 +360,8 @@ export default function Prelaunch() {
           justify-content: center;
           padding: 1.5rem 0.5rem;
           text-align: center;
-          border: 3px solid #000;
-          box-shadow: 4px 4px 0px 0px #000;
+          border: none;
+          box-shadow: none;
         }
 
         .icon-graphic {
