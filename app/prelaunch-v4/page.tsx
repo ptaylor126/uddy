@@ -78,10 +78,11 @@ export default function Prelaunch() {
           position: absolute;
           left: 0;
           top: 0;
-          width: 35%;
+          width: 60%;
           height: 100%;
           background-color: #F38AB6;
-          clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
+          /* x y points: Top-Left, Top-Right (narrow), Bottom-Right (wide), Bottom-Left */
+          clip-path: polygon(0 0, 15% 0, 100% 100%, 0 100%);
           z-index: -1;
         }
 
@@ -89,9 +90,10 @@ export default function Prelaunch() {
           position: absolute;
           right: 0;
           bottom: 0;
-          width: 45%;
-          height: 50%;
+          width: 35%;
+          height: 35%;
           background-color: #00A887;
+          /* x y points: Top-Right, Bottom-Left, Bottom-Right */
           clip-path: polygon(100% 30%, 0 100%, 100% 100%);
           z-index: -1;
         }
