@@ -1,529 +1,335 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import React from 'react';
 
-export default function PrelaunchV4Page() {
-  const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMsg, setErrorMsg] = useState('');
-
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    if (status === 'loading') return;
-
-    setStatus('loading');
-    setErrorMsg('');
-
-    try {
-      const res = await fetch('/api/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'landing' }),
-      });
-      const data = await res.json();
-
-      if (!res.ok) {
-        setStatus('error');
-        setErrorMsg(data.error || 'Something went wrong.');
-        return;
-      }
-
-      setStatus('success');
-    } catch (err) {
-      setStatus('error');
-      setErrorMsg('Network error. Please try again.');
-    }
-  }
-
+export default function Prelaunch() {
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;900&display=swap"
-      />
-
-      <div className="split">
+      <div className="layout-container">
         {/* LEFT PANEL */}
-        <section className="left">
-          <h1 className="wordmark">uddy</h1>
+        <div className="left-panel">
+          <div className="content-wrapper">
+            <h1 className="logo-text">uddy</h1>
 
-          <div className="copy-block">
-            <p className="headline">
-              COMING SOON: O.G. SKIN FOOD.<br />
-              NO NASTIES. JUST GOOD SH*T.
-            </p>
-            <p className="subtext">
-              Simple, tallow-based skincare for dry and sensitive skin.
-              Join the list to be notified of our launch.
-            </p>
-          </div>
+            <div className="copy-block">
+              <h2>COMING SOON: O.G. SKIN FOOD.<br/>NO NASTIES. JUST GOOD SH*T.</h2>
+              <p>Simple, tallow-based skincare for dry and sensitive skin. Join the list to be notified of our launch.</p>
+            </div>
 
-          <div className="cta">
-            {status === 'success' ? (
-              <div className="success-card" role="status">
-                <p className="success-heading">YOU&rsquo;RE ON THE LIST.</p>
-                <p className="success-body">
-                  We&rsquo;ve sent a confirmation link to <strong>{email}</strong>.
-                  Tap it to finish signing up.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} noValidate>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  required
-                  disabled={status === 'loading'}
-                  aria-label="Email address"
-                  className="email"
-                />
-                <button
-                  type="submit"
-                  disabled={status === 'loading' || !email}
-                  className="submit"
-                >
-                  {status === 'loading' ? 'SENDING…' : 'GET NOTIFIED (FEED YOUR FACE)'}
-                </button>
-                {status === 'error' && (
-                  <p className="error" role="alert">{errorMsg}</p>
-                )}
-              </form>
-            )}
+            <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
+              <input type="email" placeholder="Enter your email address" required />
+              <button type="submit">GET NOTIFIED (FEED YOUR FACE)</button>
+            </form>
           </div>
-        </section>
+        </div>
 
         {/* RIGHT PANEL */}
-        <section className="right">
-          <div className="color-block-cream" />
-          <div className="color-block-pink" />
+        <div className="right-panel">
+          {/* Background color blocks */}
+          <div className="pink-bg"></div>
 
-          {/* Hand-drawn starburst — top right */}
-          <svg className="burst burst-tr" viewBox="0 0 120 120" aria-hidden="true">
-            <path
-              d="M60 5 L66 38 L92 14 L74 44 L113 38 L78 56 L113 74 L74 68 L92 98 L66 74 L60 115 L54 74 L28 98 L46 68 L7 74 L42 56 L7 38 L46 44 L28 14 L54 38 Z"
-              fill="#1a1a1a"
-              stroke="#1a1a1a"
-              strokeWidth="2"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <div className="image-container">
+            {/* Replace this with your actual local image path */}
+            <img src="/jars-stacked-three.jpg" alt="Uddy Skincare Jars" className="product-image" />
 
-          {/* Hand-drawn starburst — bottom left */}
-          <svg className="burst burst-bl" viewBox="0 0 120 120" aria-hidden="true">
-            <path
-              d="M60 8 L67 40 L94 18 L75 46 L112 40 L80 58 L112 76 L75 70 L94 102 L67 78 L60 112 L53 78 L26 102 L45 70 L8 76 L40 58 L8 40 L45 46 L26 18 L53 40 Z"
-              fill="none"
-              stroke="#1a1a1a"
-              strokeWidth="4"
-              strokeLinejoin="round"
-            />
-          </svg>
-
-          {/* Curved hand-drawn arrow — top left toward jars */}
-          <svg className="arrow arrow-tl" viewBox="0 0 200 140" aria-hidden="true">
-            <path
-              d="M10 20 Q 80 10 120 70 T 180 110"
-              fill="none"
-              stroke="#1a1a1a"
-              strokeWidth="4"
-              strokeLinecap="round"
-            />
-            <path
-              d="M170 95 L182 112 L162 115 Z"
-              fill="#1a1a1a"
-              stroke="#1a1a1a"
-              strokeWidth="2"
-              strokeLinejoin="round"
-            />
-          </svg>
-
-          {/* Curved hand-drawn arrow — bottom right toward jars */}
-          <svg className="arrow arrow-br" viewBox="0 0 200 140" aria-hidden="true">
-            <path
-              d="M190 120 Q 120 130 80 70 T 20 30"
-              fill="none"
-              stroke="#1a1a1a"
-              strokeWidth="4"
-              strokeLinecap="round"
-            />
-            <path
-              d="M30 45 L18 28 L38 25 Z"
-              fill="#1a1a1a"
-              stroke="#1a1a1a"
-              strokeWidth="2"
-              strokeLinejoin="round"
-            />
-          </svg>
-
-          {/* Product photo */}
-          <div className="jars-wrap">
-            <img src="/jars-stacked-three.jpg" alt="Stacked Uddy jars" className="jars" />
-
-            {/* Jagged hand-drawn outline overlay 1 */}
-            <svg className="jagged jagged-1" viewBox="0 0 300 400" aria-hidden="true">
-              <path
-                d="M70 50 L78 58 L74 70 L82 80 L76 92 L84 104 L78 116 L86 130 L80 144 L86 158 L82 174 L88 188 L84 204 L92 218 L86 232 L94 246 L88 260 L96 274 L90 288 L98 302 L92 316 L100 330 L94 344 L102 356 L120 350 L140 354 L160 350 L180 354 L200 350 L218 354 L230 348 L226 332 L232 316 L228 300 L234 284 L230 268 L236 252 L232 236 L238 220 L234 204 L240 188 L236 172 L242 156 L238 140 L244 124 L240 108 L246 92 L242 76 L240 60 L228 54 L210 50 L190 54 L170 50 L150 54 L130 50 L110 54 L90 50 Z"
-                fill="none"
-                stroke="#1a1a1a"
-                strokeWidth="3"
-                strokeLinejoin="round"
-              />
+            {/* Hand-drawn frame SVG */}
+            <svg className="doodle doodle-frame" viewBox="0 0 200 300" preserveAspectRatio="none">
+              <path d="M10,10 Q90,5 190,15 Q195,150 185,290 Q100,295 15,285 Q5,150 10,10 Z" fill="none" stroke="#000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="8 6"/>
             </svg>
 
-            {/* Jagged hand-drawn outline overlay 2 — offset for raw layered feel */}
-            <svg className="jagged jagged-2" viewBox="0 0 300 400" aria-hidden="true">
-              <path
-                d="M80 60 Q 60 110 78 160 Q 64 210 84 260 Q 70 310 88 350 L 220 354 Q 240 310 230 260 Q 244 210 232 160 Q 240 110 224 60 Q 150 50 80 60 Z"
-                fill="none"
-                stroke="#1a1a1a"
-                strokeWidth="3"
-                strokeDasharray="8 6"
-                strokeLinejoin="round"
-              />
+            {/* Hand-drawn Starburst 1 (Top Right) */}
+            <svg className="doodle doodle-star-top" viewBox="0 0 100 100">
+              <path d="M50,5 L60,35 L95,25 L70,50 L95,75 L60,65 L50,95 L40,65 L5,75 L30,50 L5,25 L40,35 Z" fill="none" stroke="#000" strokeWidth="4" strokeLinejoin="miter"/>
+            </svg>
+
+            {/* Hand-drawn Starburst 2 (Bottom Left) */}
+            <svg className="doodle doodle-star-bottom" viewBox="0 0 100 100">
+              <path d="M50,10 L58,40 L90,35 L65,55 L85,85 L55,70 L45,95 L35,65 L10,75 L30,50 L10,30 L40,40 Z" fill="none" stroke="#000" strokeWidth="4" strokeLinejoin="miter"/>
+            </svg>
+
+            {/* Hand-drawn Arrow (Pointing to jars) */}
+            <svg className="doodle doodle-arrow" viewBox="0 0 100 100">
+              <path d="M20,20 Q60,10 80,60" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round"/>
+              <path d="M65,50 L80,60 L70,75" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
 
-          {/* Bottom icon row */}
+          {/* Bottom Icons */}
           <div className="icon-row">
-            <div className="icon-cell">
-              <svg viewBox="0 0 40 40" aria-hidden="true">
-                <path
-                  d="M22 4 L8 24 L18 24 L14 36 L32 14 L22 14 Z"
-                  fill="#1a1a1a"
-                  stroke="#1a1a1a"
-                  strokeWidth="1.5"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span>Real<br />Ingredients</span>
+            <div className="icon-item">
+              <div className="icon-box">⚡</div>
+              <span>REAL<br/>INGREDIENTS</span>
             </div>
-            <div className="icon-cell">
-              <svg viewBox="0 0 40 40" aria-hidden="true">
-                <path
-                  d="M20 4 C 12 16, 8 22, 8 28 C 8 34, 13 38, 20 38 C 27 38, 32 34, 32 28 C 32 22, 28 16, 20 4 Z"
-                  fill="#1a1a1a"
-                />
-              </svg>
-              <span>Water<br />Drop</span>
+            <div className="icon-item">
+              <div className="icon-box">💧</div>
+              <span>WATER<br/>DROP</span>
             </div>
-            <div className="icon-cell">
-              <svg viewBox="0 0 40 40" aria-hidden="true">
-                <path
-                  d="M14 4 L26 4 L26 16 L34 32 C 35 35, 33 38, 30 38 L 10 38 C 7 38, 5 35, 6 32 L 14 16 Z"
-                  fill="none"
-                  stroke="#1a1a1a"
-                  strokeWidth="2.5"
-                  strokeLinejoin="round"
-                />
-                <line x1="14" y1="22" x2="26" y2="22" stroke="#1a1a1a" strokeWidth="2.5" />
-              </svg>
-              <span>Natural<br />Protein</span>
+            <div className="icon-item">
+              <div className="icon-box">🧪</div>
+              <span>NATURAL<br/>PROTEIN</span>
             </div>
-            <div className="icon-cell">
-              <svg viewBox="0 0 40 40" aria-hidden="true">
-                <path
-                  d="M20 34 C 12 28, 4 22, 4 14 C 4 9, 8 5, 13 5 C 16 5, 19 7, 20 10 C 21 7, 24 5, 27 5 C 32 5, 36 9, 36 14 C 36 22, 28 28, 20 34 Z"
-                  fill="#1a1a1a"
-                />
-              </svg>
-              <span>Cruelty<br />Free</span>
+            <div className="icon-item">
+              <div className="icon-box">🖤</div>
+              <span>CRUELTY<br/>FREE</span>
             </div>
           </div>
-        </section>
+        </div>
       </div>
 
       <style jsx global>{`
-        html, body {
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700;800;900&display=swap');
+
+        * {
+          box-sizing: border-box;
           margin: 0;
           padding: 0;
-          background: #FAF5EF;
-          font-family: 'DM Sans', system-ui, sans-serif;
-          color: #1a1a1a;
-          -webkit-font-smoothing: antialiased;
         }
-        body { overflow-x: hidden; }
-      `}</style>
 
-      <style jsx>{`
-        .split {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
+        body {
+          font-family: 'DM Sans', sans-serif;
+          background-color: #FDFBF7;
+          color: #000;
+          overflow-x: hidden;
+        }
+
+        .layout-container {
+          display: flex;
           min-height: 100vh;
+          width: 100vw;
         }
 
-        /* ============ LEFT PANEL ============ */
-        .left {
-          background: #FAF5EF;
-          padding: 56px 64px 56px 64px;
+        /* LEFT PANEL STYLES */
+        .left-panel {
+          flex: 1;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          border-right: 4px solid #1a1a1a;
-          position: relative;
-        }
-        .wordmark {
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 900;
-          font-size: clamp(140px, 22vw, 320px);
-          line-height: 0.78;
-          letter-spacing: -0.06em;
-          text-transform: lowercase;
-          color: #1a1a1a;
-          margin: 0 0 0 -8px;
-        }
-        .copy-block { margin-top: 24px; max-width: 540px; }
-        .headline {
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 900;
-          font-size: clamp(20px, 2.1vw, 30px);
-          line-height: 1.1;
-          letter-spacing: -0.01em;
-          color: #1a1a1a;
-          margin: 0 0 20px 0;
-        }
-        .subtext {
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 1.5;
-          color: #1a1a1a;
-          margin: 0;
-          max-width: 460px;
+          justify-content: center;
+          padding: 4rem;
+          background-color: #FDFBF7;
+          border-right: 4px solid #000;
+          z-index: 2;
         }
 
-        .cta {
-          margin-top: 48px;
-          max-width: 540px;
-        }
-        .email {
+        .content-wrapper {
+          max-width: 600px;
+          margin: 0 auto;
           width: 100%;
-          padding: 18px 22px;
-          border: 4px solid #1a1a1a;
-          background: #ffffff;
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 500;
-          font-size: 16px;
-          color: #1a1a1a;
-          outline: none;
-          border-radius: 0;
-          margin-bottom: 12px;
-          box-shadow: 6px 6px 0 #1a1a1a;
-          transition: transform 0.08s ease, box-shadow 0.08s ease;
         }
-        .email::placeholder { color: #999; }
-        .email:focus {
-          transform: translate(2px, 2px);
-          box-shadow: 4px 4px 0 #1a1a1a;
-        }
-        .submit {
-          width: 100%;
-          padding: 20px 24px;
-          border: 4px solid #1a1a1a;
-          background: #1a1a1a;
-          color: #ffffff;
-          font-family: 'DM Sans', sans-serif;
+
+        .logo-text {
+          font-size: clamp(6rem, 15vw, 12rem);
           font-weight: 900;
-          font-size: 16px;
-          letter-spacing: 0.04em;
+          letter-spacing: -0.05em;
+          line-height: 0.8;
+          margin-bottom: 3rem;
+          color: #111;
+        }
+
+        .copy-block h2 {
+          font-size: 1.8rem;
+          font-weight: 800;
           text-transform: uppercase;
-          cursor: pointer;
-          border-radius: 0;
-          box-shadow: 6px 6px 0 #F58AA0;
-          transition: transform 0.08s ease, box-shadow 0.08s ease;
+          line-height: 1.1;
+          margin-bottom: 1rem;
         }
-        .submit:hover:not(:disabled) {
-          transform: translate(3px, 3px);
-          box-shadow: 3px 3px 0 #F58AA0;
-        }
-        .submit:active:not(:disabled) {
-          transform: translate(6px, 6px);
-          box-shadow: 0 0 0 #F58AA0;
-        }
-        .submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        .error {
-          margin: 14px 2px 0;
-          color: #b42318;
-          font-size: 14px;
-          font-weight: 700;
-        }
-        .success-card {
-          background: #ffffff;
-          border: 4px solid #1a1a1a;
-          padding: 24px;
-          box-shadow: 6px 6px 0 #1a1a1a;
-        }
-        .success-heading {
-          font-weight: 900;
-          font-size: 22px;
-          letter-spacing: -0.01em;
-          margin: 0 0 8px 0;
-        }
-        .success-body {
-          font-size: 15px;
+        .copy-block p {
+          font-size: 1.2rem;
+          font-weight: 400;
           line-height: 1.5;
-          margin: 0;
-          font-weight: 500;
+          margin-bottom: 3rem;
+          max-width: 90%;
         }
 
-        /* ============ RIGHT PANEL ============ */
-        .right {
-          position: relative;
-          overflow: hidden;
-          padding: 56px 48px 32px;
+        .signup-form {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          min-height: 100vh;
+          gap: 1.5rem;
         }
-        .color-block-cream {
-          position: absolute;
-          inset: 0;
-          background: #FAF5EF;
-          z-index: 0;
+
+        .signup-form input {
+          width: 100%;
+          padding: 1.5rem;
+          font-size: 1.2rem;
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 700;
+          background: #fff;
+          border: 4px solid #000;
+          box-shadow: 6px 6px 0px 0px #000;
+          outline: none;
+          transition: transform 0.1s ease;
         }
-        .color-block-pink {
+
+        .signup-form input:focus {
+          transform: translate(-2px, -2px);
+          box-shadow: 8px 8px 0px 0px #000;
+        }
+
+        .signup-form button {
+          width: 100%;
+          padding: 1.5rem;
+          font-size: 1.2rem;
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 800;
+          background: #000;
+          color: #fff;
+          border: 4px solid #000;
+          box-shadow: 6px 6px 0px 0px #000;
+          cursor: pointer;
+          text-transform: uppercase;
+          transition: all 0.1s ease;
+        }
+
+        .signup-form button:hover {
+          transform: translate(2px, 2px);
+          box-shadow: 4px 4px 0px 0px #000;
+        }
+
+        .signup-form button:active {
+          transform: translate(6px, 6px);
+          box-shadow: 0px 0px 0px 0px #000;
+        }
+
+        /* RIGHT PANEL STYLES */
+        .right-panel {
+          flex: 1;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background-color: #FDFBF7;
+          overflow: hidden;
+        }
+
+        .pink-bg {
           position: absolute;
           top: 0;
           right: 0;
           width: 70%;
-          height: 60%;
-          background: #F58AA0;
-          z-index: 1;
-          border-bottom: 4px solid #1a1a1a;
-          border-left: 4px solid #1a1a1a;
+          height: 100%;
+          background-color: #FF8BA7;
+          border-left: 4px solid #000;
+          z-index: 0;
         }
 
-        .burst {
-          position: absolute;
-          z-index: 4;
-          pointer-events: none;
-        }
-        .burst-tr {
-          top: 24px;
-          right: 24px;
-          width: 140px;
-          height: 140px;
-          transform: rotate(15deg);
-        }
-        .burst-bl {
-          bottom: 110px;
-          left: 24px;
-          width: 110px;
-          height: 110px;
-          transform: rotate(-20deg);
-        }
-
-        .arrow {
-          position: absolute;
-          z-index: 4;
-          pointer-events: none;
-        }
-        .arrow-tl {
-          top: 80px;
-          left: 30px;
-          width: 200px;
-          height: 140px;
-          transform: rotate(-8deg);
-        }
-        .arrow-br {
-          bottom: 220px;
-          right: 30px;
-          width: 200px;
-          height: 140px;
-          transform: rotate(10deg) scaleX(-1);
-        }
-
-        .jars-wrap {
+        .image-container {
           position: relative;
-          z-index: 3;
-          align-self: center;
-          margin-top: 20px;
-          width: 100%;
-          max-width: 460px;
+          z-index: 1;
+          width: 60%;
+          max-width: 400px;
+          margin-bottom: 4rem;
         }
-        .jars {
+
+        .product-image {
           width: 100%;
           height: auto;
           display: block;
-          border: 4px solid #1a1a1a;
-          box-shadow: 12px 12px 0 #1a1a1a;
+          border: 4px solid #000;
+          box-shadow: 12px 12px 0px 0px #000;
+          background: #fff;
         }
-        .jagged {
+
+        /* DOODLES */
+        .doodle {
           position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
+          z-index: 2;
           pointer-events: none;
         }
-        .jagged-1 { transform: translate(-6px, -6px); }
-        .jagged-2 { transform: translate(8px, 6px); }
 
+        .doodle-frame {
+          top: -20px;
+          left: -20px;
+          width: calc(100% + 40px);
+          height: calc(100% + 40px);
+        }
+
+        .doodle-star-top {
+          top: -50px;
+          right: -60px;
+          width: 100px;
+          height: 100px;
+        }
+
+        .doodle-star-bottom {
+          bottom: -40px;
+          left: -60px;
+          width: 80px;
+          height: 80px;
+        }
+
+        .doodle-arrow {
+          top: 10%;
+          left: -80px;
+          width: 100px;
+          height: 100px;
+          transform: rotate(-20deg);
+        }
+
+        /* BOTTOM ICONS */
         .icon-row {
           position: relative;
-          z-index: 3;
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 16px;
-          margin-top: 32px;
-          padding-top: 24px;
-          border-top: 3px solid #1a1a1a;
+          z-index: 1;
+          display: flex;
+          gap: 2rem;
+          justify-content: center;
+          background: #FDFBF7;
+          padding: 1.5rem 2rem;
+          border: 4px solid #000;
+          box-shadow: 6px 6px 0px 0px #000;
         }
-        .icon-cell {
+
+        .icon-item {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 8px;
           text-align: center;
+          gap: 0.5rem;
         }
-        .icon-cell svg {
-          width: 36px;
-          height: 36px;
+
+        .icon-box {
+          font-size: 2rem;
         }
-        .icon-cell span {
-          font-family: 'DM Sans', sans-serif;
-          font-weight: 700;
-          font-size: 11px;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: #1a1a1a;
+
+        .icon-item span {
+          font-size: 0.8rem;
+          font-weight: 800;
           line-height: 1.2;
         }
 
-        /* ============ RESPONSIVE ============ */
-        @media (max-width: 900px) {
-          .split {
-            grid-template-columns: 1fr;
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+          .layout-container {
+            flex-direction: column;
           }
-          .left {
-            padding: 40px 28px 48px;
+
+          .left-panel {
             border-right: none;
-            border-bottom: 4px solid #1a1a1a;
+            border-bottom: 4px solid #000;
+            padding: 3rem 2rem;
           }
-          .wordmark {
-            font-size: clamp(110px, 30vw, 200px);
+
+          .right-panel {
+            padding: 4rem 2rem;
           }
-          .right {
-            padding: 40px 24px 28px;
-            min-height: auto;
+
+          .pink-bg {
+            width: 100%;
+            height: 60%;
+            top: auto;
+            bottom: 0;
+            border-left: none;
+            border-top: 4px solid #000;
           }
-          .color-block-pink {
+
+          .image-container {
             width: 80%;
-            height: 50%;
           }
-          .burst-tr { width: 90px; height: 90px; }
-          .burst-bl { width: 70px; height: 70px; bottom: 160px; }
-          .arrow-tl, .arrow-br { width: 140px; height: 100px; }
-          .arrow-br { bottom: 240px; }
-        }
-        @media (max-width: 480px) {
-          .left { padding: 32px 20px 40px; }
-          .right { padding: 32px 18px 24px; }
-          .icon-row { gap: 8px; }
-          .icon-cell span { font-size: 10px; }
-          .icon-cell svg { width: 30px; height: 30px; }
+
+          .icon-row {
+            gap: 1rem;
+            padding: 1rem;
+          }
         }
       `}</style>
     </>
