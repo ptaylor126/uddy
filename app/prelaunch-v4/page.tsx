@@ -168,12 +168,15 @@ export default function Prelaunch() {
         }
 
         .logo-text {
-          font-size: 11.5vw;
+          font-size: 14vw;
           font-weight: 900;
           letter-spacing: -0.06em;
-          line-height: 0.8;
+          line-height: 0.75;
+          margin-top: 0;
           margin-bottom: 2rem;
           color: #000;
+          transform: scaleY(1.8); /* Stretches the text vertically */
+          transform-origin: left top;
         }
 
         .copy-block h2 {
@@ -233,31 +236,29 @@ export default function Prelaunch() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          background-color: #F4F4F0;
+          background-color: #F4F4F0; /* Restores the off-white center */
           padding: 2rem;
+          z-index: 1;
         }
-
-        /* COLOR BLOCKS - Corrected Angles */
         .bg-shape-pink {
           position: absolute;
           left: 0;
           top: 0;
-          width: 100%;
+          width: 40%;
           height: 100%;
           background-color: #F38AB6;
-          clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
-          z-index: 0;
+          clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
+          z-index: -1;
         }
-
         .bg-shape-teal {
           position: absolute;
           right: 0;
           bottom: 0;
-          width: 60%;
-          height: 60%;
+          width: 45%;
+          height: 50%;
           background-color: #00A887;
           clip-path: polygon(100% 30%, 0 100%, 100% 100%);
-          z-index: 0;
+          z-index: -1;
         }
 
         /* HERO COMPOSITION */
@@ -273,8 +274,8 @@ export default function Prelaunch() {
 
         .image-wrapper {
           position: relative;
-          width: 70%;
-          margin-bottom: 3rem;
+          width: 55%; /* Pulls the container tight around the jars */
+          margin: 0 auto 3rem auto;
           z-index: 5;
         }
 
@@ -293,43 +294,19 @@ export default function Prelaunch() {
         }
 
         .doodle-frame {
-          top: -10%;
-          left: -10%;
-          width: 120%;
-          height: 120%;
-          z-index: 10;
+          top: -10%; left: -10%; width: 120%; height: 120%; z-index: 10;
         }
-
         .doodle-group-tl {
-          top: -10%;
-          left: -30%;
-          width: 45%;
-          aspect-ratio: 1;
-          z-index: 10;
+          top: -10%; left: -20%; width: 50%; aspect-ratio: 1; z-index: 10;
         }
-
         .doodle-group-tr {
-          top: -15%;
-          right: -25%;
-          width: 45%;
-          aspect-ratio: 1;
-          z-index: 10;
+          top: -15%; right: -15%; width: 50%; aspect-ratio: 1; z-index: 10;
         }
-
         .doodle-group-bl {
-          bottom: 5%;
-          left: -20%;
-          width: 35%;
-          aspect-ratio: 1;
-          z-index: 10;
+          bottom: -5%; left: -10%; width: 40%; aspect-ratio: 1; z-index: 10;
         }
-
         .doodle-group-br {
-          bottom: 5%;
-          right: -20%;
-          width: 35%;
-          aspect-ratio: 1;
-          z-index: 10;
+          bottom: -5%; right: -10%; width: 40%; aspect-ratio: 1; z-index: 10;
         }
 
         .doodle-icon {
