@@ -29,13 +29,15 @@ export default function Prelaunch() {
           <div className="pink-bg"></div>
 
           <div className="image-container">
-            {/* Replace this with your actual local image path */}
-            <img src="/jars-stacked-three.jpg" alt="Uddy Skincare Jars" className="product-image" />
+            <div className="image-wrapper">
+              {/* Explicitly using the requested pyramid image */}
+              <img src="/jars-pyramid-white.jpg" alt="Uddy Skincare Jars" className="product-image" />
 
-            {/* Hand-drawn frame SVG */}
-            <svg className="doodle doodle-frame" viewBox="0 0 200 300" preserveAspectRatio="none">
-              <path d="M10,10 Q90,5 190,15 Q195,150 185,290 Q100,295 15,285 Q5,150 10,10 Z" fill="none" stroke="#000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="8 6"/>
-            </svg>
+              {/* Hand-drawn frame SVG - Absolute positioned over the image wrapper */}
+              <svg className="doodle doodle-frame" viewBox="0 0 200 300" preserveAspectRatio="none">
+                <path d="M10,10 Q90,5 190,15 Q195,150 185,290 Q100,295 15,285 Q5,150 10,10 Z" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="10 8"/>
+              </svg>
+            </div>
 
             {/* Hand-drawn Starburst 1 (Top Right) */}
             <svg className="doodle doodle-star-top" viewBox="0 0 100 100">
@@ -123,6 +125,7 @@ export default function Prelaunch() {
           line-height: 0.8;
           margin-bottom: 3rem;
           color: #111;
+          text-transform: lowercase; /* Forces lowercase */
         }
 
         .copy-block h2 {
@@ -206,7 +209,7 @@ export default function Prelaunch() {
           position: absolute;
           top: 0;
           right: 0;
-          width: 70%;
+          width: 60%;
           height: 100%;
           background-color: #FF8BA7;
           border-left: 4px solid #000;
@@ -216,9 +219,15 @@ export default function Prelaunch() {
         .image-container {
           position: relative;
           z-index: 1;
-          width: 60%;
-          max-width: 400px;
+          width: 50%;
+          max-width: 350px;
           margin-bottom: 4rem;
+        }
+
+        .image-wrapper {
+          position: relative;
+          width: 100%;
+          display: block;
         }
 
         .product-image {
@@ -228,6 +237,8 @@ export default function Prelaunch() {
           border: 4px solid #000;
           box-shadow: 12px 12px 0px 0px #000;
           background: #fff;
+          position: relative;
+          z-index: 1;
         }
 
         /* DOODLES */
@@ -242,27 +253,28 @@ export default function Prelaunch() {
           left: -20px;
           width: calc(100% + 40px);
           height: calc(100% + 40px);
+          z-index: 3;
         }
 
         .doodle-star-top {
           top: -50px;
           right: -60px;
-          width: 100px;
-          height: 100px;
+          width: 90px;
+          height: 90px;
         }
 
         .doodle-star-bottom {
-          bottom: -40px;
+          bottom: -30px;
           left: -60px;
-          width: 80px;
-          height: 80px;
+          width: 70px;
+          height: 70px;
         }
 
         .doodle-arrow {
-          top: 10%;
-          left: -80px;
-          width: 100px;
-          height: 100px;
+          top: 5%;
+          left: -70px;
+          width: 80px;
+          height: 80px;
           transform: rotate(-20deg);
         }
 
@@ -315,7 +327,7 @@ export default function Prelaunch() {
 
           .pink-bg {
             width: 100%;
-            height: 60%;
+            height: 50%;
             top: auto;
             bottom: 0;
             border-left: none;
@@ -323,7 +335,7 @@ export default function Prelaunch() {
           }
 
           .image-container {
-            width: 80%;
+            width: 70%;
           }
 
           .icon-row {
