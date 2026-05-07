@@ -56,7 +56,7 @@ export const metadata: Metadata = {
 };
 
 // Routes that render without the global header/footer/marquee.
-const CHROMELESS_PATHS = ['/prelaunch', '/prelaunch-v1', '/prelaunch-v2', '/prelaunch-v3', '/prelaunch-v4', '/confirmed'];
+const CHROMELESS_PATHS = ['/prelaunch', '/prelaunch-v1', '/prelaunch-v2', '/prelaunch-v3', '/prelaunch-v4', '/prelaunch-v5', '/confirmed'];
 
 export default async function RootLayout({
   children,

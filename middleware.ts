@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // Routes that stay accessible even in pre-launch mode.
-const ALLOWED_PATHS = ['/prelaunch', '/prelaunch-v1', '/prelaunch-v2', '/prelaunch-v3', '/prelaunch-v4', '/confirmed', '/api/signup', '/api/confirm', '/v1', '/v2', '/v3'];
+const ALLOWED_PATHS = ['/prelaunch', '/prelaunch-v1', '/prelaunch-v2', '/prelaunch-v3', '/prelaunch-v4', '/prelaunch-v5', '/confirmed', '/api/signup', '/api/confirm', '/v1', '/v2', '/v3'];
 
 // Pass the (post-rewrite) pathname through to the server-rendered layout
 // so it can decide whether to render the site chrome.
