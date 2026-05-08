@@ -13,30 +13,30 @@ export async function sendConfirmationEmail(email: string, token: string) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Confirm your email</title>
       </head>
-      <body style="margin:0; padding:0; background:#FAF5EF; font-family: Georgia, 'Times New Roman', serif; color:#1a1a1a;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAF5EF;">
+      <body style="margin:0; padding:0; background:#edece7; font-family: Arial, Helvetica, sans-serif; color:#000;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#edece7;">
           <tr>
             <td align="center" style="padding:48px 24px;">
-              <table role="presentation" width="520" cellpadding="0" cellspacing="0" style="max-width:520px; background:#ffffff; border:2px solid #1a1a1a; border-radius:12px;">
+              <table role="presentation" width="520" cellpadding="0" cellspacing="0" style="max-width:520px; background:#ffffff; border:3px solid #000; box-shadow:4px 4px 0 #000;">
                 <tr>
                   <td style="padding:40px 40px 24px 40px;">
-                    <h1 style="margin:0 0 24px 0; font-size:36px; line-height:1.1; font-weight:700; letter-spacing:-0.02em;">Uddy</h1>
-                    <p style="margin:0 0 16px 0; font-size:17px; line-height:1.5;">Thanks for signing up.</p>
-                    <p style="margin:0 0 24px 0; font-size:17px; line-height:1.5;">Tap the button below to confirm your email and join the list. We'll be in touch before we launch.</p>
+                    <h1 style="margin:0 0 24px 0; font-size:36px; line-height:1.1; font-weight:900; letter-spacing:-0.02em; font-family:Arial,Helvetica,sans-serif; text-transform:lowercase;">uddy.</h1>
+                    <p style="margin:0 0 16px 0; font-size:17px; line-height:1.5; font-family:Arial,Helvetica,sans-serif;">Thanks for signing up.</p>
+                    <p style="margin:0 0 24px 0; font-size:17px; line-height:1.5; font-family:Arial,Helvetica,sans-serif;">Tap the button below to confirm your email and join the list. We'll be in touch before we launch.</p>
                     <table role="presentation" cellpadding="0" cellspacing="0">
                       <tr>
-                        <td style="background:#3EB489; border:2px solid #1a1a1a; border-radius:999px;">
-                          <a href="${confirmUrl}" style="display:inline-block; padding:14px 28px; font-size:16px; font-weight:600; color:#1a1a1a; text-decoration:none; font-family: Georgia, serif;">Confirm my email</a>
+                        <td style="background:#009e8c; border:3px solid #000; box-shadow:3px 3px 0 #000;">
+                          <a href="${confirmUrl}" style="display:inline-block; padding:14px 28px; font-size:16px; font-weight:800; color:#fff; text-decoration:none; font-family:Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:0.02em;">Confirm my email</a>
                         </td>
                       </tr>
                     </table>
-                    <p style="margin:32px 0 0 0; font-size:14px; line-height:1.5; color:#666;">If the button doesn't work, paste this into your browser:<br/><a href="${confirmUrl}" style="color:#666; word-break:break-all;">${confirmUrl}</a></p>
-                    <p style="margin:24px 0 0 0; font-size:14px; line-height:1.5; color:#666;">If you didn't sign up, just ignore this email and nothing will happen.</p>
+                    <p style="margin:32px 0 0 0; font-size:14px; line-height:1.5; color:#666; font-family:Arial,Helvetica,sans-serif;">If the button doesn't work, paste this into your browser:<br/><a href="${confirmUrl}" style="color:#666; word-break:break-all;">${confirmUrl}</a></p>
+                    <p style="margin:24px 0 0 0; font-size:14px; line-height:1.5; color:#666; font-family:Arial,Helvetica,sans-serif;">If you didn't sign up, just ignore this email and nothing will happen.</p>
                   </td>
                 </tr>
                 <tr>
-                  <td style="padding:24px 40px; border-top:1px solid #eee;">
-                    <p style="margin:0; font-size:13px; color:#999;">Jack &amp; Hollie &middot; Uddy</p>
+                  <td style="padding:24px 40px; border-top:3px solid #000;">
+                    <p style="margin:0; font-size:13px; color:#666; font-family:Arial,Helvetica,sans-serif; font-weight:700;">Jack &amp; Hollie &middot; Uddy</p>
                   </td>
                 </tr>
               </table>
