@@ -6,6 +6,8 @@ export async function sendConfirmationEmail(email: string, token: string) {
   const confirmUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/confirm?token=${token}`;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://uddyskin.com';
 
+  const scribbleSvg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1c.3 2 .5 4 0 6-.2 1.5-.5 3-.3 4.5M1.5 5.5c2 .5 4 1 6 1s3-.3 5-1M2.5 2.5c1.5 1.5 3 3 4.5 4.5M11.5 2.5c-1.5 1.5-3 3-4.5 4.5M3 10c1.5-1 3-2.5 4-4M11 10c-1.5-1-3-2.5-4-4' fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E";
+
   const html = `
     <!DOCTYPE html>
     <html>
@@ -19,8 +21,8 @@ export async function sendConfirmationEmail(email: string, token: string) {
           <tr>
             <td align="center" style="padding:40px 24px;">
 
-              <!-- Outer border wrapper -->
-              <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px; background:#edece7; border:1px dashed #999; padding:0;">
+              <!-- Card with solid border and hard shadow -->
+              <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px; background:#edece7; border:3px solid #000; box-shadow:4px 4px 0 #000;">
                 <tr>
                   <td style="padding:44px 44px 36px 44px;">
 
@@ -37,12 +39,12 @@ export async function sendConfirmationEmail(email: string, token: string) {
                     <p style="margin:0 0 4px 0; font-size:13px; line-height:1.4; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#009e8c; text-transform:uppercase; letter-spacing:0.06em;">HERE&#8217;S WHAT YOU&#8217;LL GET:</p>
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px; border-top:2px solid #000;"><tr><td style="font-size:0; height:0;">&nbsp;</td></tr></table>
 
-                    <!-- Bullet list with icons -->
+                    <!-- Bullet list with scribble icons -->
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:28px;">
                       <tr>
                         <td style="padding:12px 0; border-bottom:1px solid #ccc;">
                           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                            <td width="36" style="font-size:20px; color:#c9a227; vertical-align:middle; font-family:Arial,sans-serif;">&#128274;</td>
+                            <td width="28" style="vertical-align:middle;"><img src="${scribbleSvg}" alt="" width="16" height="16" style="display:block;" /></td>
                             <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">FIRST ACCESS TO OUR LAUNCH</td>
                           </tr></table>
                         </td>
@@ -50,7 +52,7 @@ export async function sendConfirmationEmail(email: string, token: string) {
                       <tr>
                         <td style="padding:12px 0; border-bottom:1px solid #ccc;">
                           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                            <td width="36" style="font-size:20px; color:#c9a227; vertical-align:middle; font-family:Arial,sans-serif;">&#128179;</td>
+                            <td width="28" style="vertical-align:middle;"><img src="${scribbleSvg}" alt="" width="16" height="16" style="display:block;" /></td>
                             <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">EARLY DISCOUNTS</td>
                           </tr></table>
                         </td>
@@ -58,7 +60,7 @@ export async function sendConfirmationEmail(email: string, token: string) {
                       <tr>
                         <td style="padding:12px 0; border-bottom:1px solid #ccc;">
                           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                            <td width="36" style="font-size:20px; color:#c9a227; vertical-align:middle; font-family:Arial,sans-serif;">&#128248;</td>
+                            <td width="28" style="vertical-align:middle;"><img src="${scribbleSvg}" alt="" width="16" height="16" style="display:block;" /></td>
                             <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">BEHIND-THE-SCENES UPDATES</td>
                           </tr></table>
                         </td>
@@ -66,21 +68,21 @@ export async function sendConfirmationEmail(email: string, token: string) {
                       <tr>
                         <td style="padding:12px 0;">
                           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                            <td width="36" style="font-size:20px; color:#c9a227; vertical-align:middle; font-family:Arial,sans-serif;">&#11088;</td>
+                            <td width="28" style="vertical-align:middle;"><img src="${scribbleSvg}" alt="" width="16" height="16" style="display:block;" /></td>
                             <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">FIRST DIBS ON LIMITED BATCHES</td>
                           </tr></table>
                         </td>
                       </tr>
                     </table>
 
-                    <!-- CTA Button -->
+                    <!-- CTA Button — full width, sharp corners, hard shadow -->
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:16px;">
                       <tr>
                         <td align="center">
-                          <table role="presentation" cellpadding="0" cellspacing="0" width="80%">
+                          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                             <tr>
-                              <td align="center" style="background:#5de0c5; border-radius:8px; box-shadow:4px 4px 0 #000;">
-                                <a href="${confirmUrl}" style="display:block; padding:18px 20px; font-size:18px; font-weight:900; color:#000; text-decoration:none; font-family:Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:0.04em; text-align:center;">CONFIRM MY EMAIL</a>
+                              <td align="center" style="background:#009e8c; border:3px solid #000; box-shadow:3px 3px 0 #000;">
+                                <a href="${confirmUrl}" style="display:block; padding:18px 20px; font-size:18px; font-weight:900; color:#f9f5f0; text-decoration:none; font-family:Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:0.04em; text-align:center;">CONFIRM MY EMAIL</a>
                               </td>
                             </tr>
                           </table>
@@ -96,10 +98,10 @@ export async function sendConfirmationEmail(email: string, token: string) {
                       <tr><td style="border-top:1px solid #ccc; font-size:0; height:0;">&nbsp;</td></tr>
                     </table>
 
-                    <!-- No spam block -->
+                    <!-- No spam block with cow SVG -->
                     <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
                       <tr>
-                        <td width="36" style="font-size:22px; vertical-align:top; color:#c9a227;">&#128004;</td>
+                        <td width="44" style="vertical-align:top; padding-right:8px;"><img src="${baseUrl}/cow.svg" alt="" width="32" height="24" style="display:block;" /></td>
                         <td style="vertical-align:top;">
                           <p style="margin:0 0 2px 0; font-size:14px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em;">NO SPAM. NO NONSENSE.</p>
                           <p style="margin:0; font-size:14px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#009e8c; text-transform:uppercase; letter-spacing:0.02em;">JUST UDDY.</p>
@@ -108,14 +110,14 @@ export async function sendConfirmationEmail(email: string, token: string) {
                     </table>
 
                     <!-- Signature -->
-                    <p style="margin:0 0 0 0; font-size:20px; font-family:Georgia,'Times New Roman',serif; font-style:italic; color:#000;">&mdash; Jack &amp; Hollie</p>
+                    <p style="margin:0; font-size:20px; font-family:Georgia,'Times New Roman',serif; font-style:italic; color:#000;">&mdash; Jack &amp; Hollie</p>
 
                   </td>
                 </tr>
 
                 <!-- Fallback / fine print -->
                 <tr>
-                  <td style="padding:20px 44px 32px 44px; border-top:1px solid #ccc;">
+                  <td style="padding:20px 44px 32px 44px; border-top:3px solid #000;">
                     <p style="margin:0 0 10px 0; font-size:12px; line-height:1.5; color:#888; font-family:Arial,Helvetica,sans-serif;">If the button doesn&#8217;t work, paste this into your browser:<br/><a href="${confirmUrl}" style="color:#888; word-break:break-all;">${confirmUrl}</a></p>
                     <p style="margin:0; font-size:12px; line-height:1.5; color:#888; font-family:Arial,Helvetica,sans-serif;">If you didn&#8217;t sign up, just ignore this email and nothing will happen.</p>
                   </td>
