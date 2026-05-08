@@ -211,7 +211,8 @@ export default function PrelaunchPage() {
         }
         .tagline-wrap {
           text-align: center;
-          padding: clamp(4px, 0.8vh, 8px) 0;
+          padding: 0;
+          margin-top: clamp(-6px, -0.8vh, -2px);
         }
         .tagline {
           font-weight: 800;
@@ -239,17 +240,30 @@ export default function PrelaunchPage() {
         }
         .signup-list {
           margin: 0;
-          padding: 0 0 0 24px;
-          list-style: disc;
+          padding: 0;
+          list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          align-items: center;
+          gap: clamp(2px, 0.5vh, 6px);
         }
         .signup-list li {
           font-weight: 500;
           font-size: clamp(14px, 2.1vh, 20px);
           color: #000;
           line-height: 1.4;
+          padding-left: 22px;
+          position: relative;
+        }
+        .signup-list li::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 14px;
+          height: 14px;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 1c.3 2 .5 4 0 6-.2 1.5-.5 3-.3 4.5M1.5 5.5c2 .5 4 1 6 1s3-.3 5-1M2.5 2.5c1.5 1.5 3 3 4.5 4.5M11.5 2.5c-1.5 1.5-3 3-4.5 4.5M3 10c1.5-1 3-2.5 4-4M11 10c-1.5-1-3-2.5-4-4' fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / contain;
         }
 
         /* ===== Signup ===== */
@@ -257,7 +271,7 @@ export default function PrelaunchPage() {
           display: flex;
           flex-direction: column;
           gap: clamp(6px, 1vh, 10px);
-          margin-top: 24px;
+          margin-top: clamp(4px, 0.8vh, 12px);
           padding-bottom: clamp(8px, 1.6vh, 16px);
         }
         .signup-heading {
