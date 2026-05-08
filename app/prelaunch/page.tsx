@@ -1,27 +1,15 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import Marquee from '@/components/Marquee';
+import { Inter } from 'next/font/google';
 
-/**
- * Landing page for Uddy pre-launch.
- *
- * Neubrutalist styling matched to the live uddyskin.co.uk homepage:
- *  - Marquee ticker
- *  - Hard offset text shadow on hero ("FEED YOUR FACE.")
- *  - Rotated yellow sticker badge
- *  - White subhead box with thick black border
- *  - Ingredient cards with alternating green/pink hard drop shadows
- *  - Handwritten pink script for accent copy
- *  - Button with hard offset shadow that "presses down" on hover
- *
- * Asset paths assume /public contains:
- *  /uddy-pink-logo.png, /sticker-tallow.png, /sticker-jojoba.png,
- *  /sticker-oat.png, /illustrations/sticker-essentialoils.png
- *
- * Fonts come from next/font variables declared in app/layout.tsx:
- *  --font-montserrat (display + body), --font-pacifico (handwritten script).
- */
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '700', '800', '900'],
+  variable: '--font-inter',
+});
+
 export default function PrelaunchPage() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -49,41 +37,37 @@ export default function PrelaunchPage() {
       }
 
       setStatus('success');
-    } catch (err) {
+    } catch {
       setStatus('error');
       setErrorMsg('Network error. Please try again.');
     }
   }
 
   return (
-    <>
-      <Marquee />
+    <div className={`page ${inter.variable}`}>
+      {/* Background strips (page level) */}
+      <div className="bg-teal-top" />
+      <div className="bg-pink-bottom" />
 
-      {/* Logo bar */}
-      <header className="uddy-header">
-        <img src="/logo-home-new.svg" alt="Uddy" className="logo" />
-      </header>
+      {/* Content layout */}
+      <div className="layout">
+        {/* Shapes layered between hero and copy panel */}
+        <div className="bg-teal-wedge" />
+        <div className="bg-pink-shape" />
+        {/* Left copy panel */}
+        <div className="copy-panel">
+          <div className="copy-inner">
+            <img src="/uddy-wordmark.svg" alt="Uddy" className="wordmark" />
 
-      <main className="uddy-prelaunch">
-        <div className="container">
-
-          {/* Hero — pink block */}
-          <section className="hero-block">
-            <div className="hero-sticker">
-              <span>Coming<br/>Soon</span>
+            <div className="tagline-wrap">
+              <p className="tagline">NO NASTIES. JUST NATURE</p>
             </div>
 
-            <h1 className="headline">
-              Feed<br/>your<br/>face.
-            </h1>
-
-            <div className="subhead-box">
-              <p>Tallow-based skincare for dry, sensitive and easily irritated skin.</p>
+            <div className="yellow-box">
+              <p>Nothing fancy. Nothing fake. Just three ingredients doing what they&rsquo;re supposed to.</p>
+              <p>Simple, tallow-based skincare for dry and sensitive skin.</p>
             </div>
-          </section>
 
-          {/* Signup */}
-          <section className="signup">
             {status === 'success' ? (
               <div className="success-card" role="status">
                 <h2 className="success-heading">You&rsquo;re on the list.</h2>
@@ -93,10 +77,9 @@ export default function PrelaunchPage() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate>
-                <h2 className="signup-heading">Get on the list.</h2>
-                <p className="signup-sub">Be first to know when we launch.</p>
-                <div className="form-row">
+              <div className="signup-section">
+                <h2 className="signup-heading">GET ON THE LIST</h2>
+                <form onSubmit={handleSubmit} noValidate className="signup-form">
                   <input
                     type="email"
                     name="email"
@@ -113,458 +96,423 @@ export default function PrelaunchPage() {
                     disabled={status === 'loading' || !email}
                     className="submit-button"
                   >
-                    {status === 'loading' ? 'Sending…' : 'Join'}
+                    {status === 'loading' ? 'Sending\u2026' : 'GET NOTIFIED (FEED YOUR FACE)'}
                   </button>
-                </div>
+                </form>
                 {status === 'error' && (
                   <p className="error-message" role="alert">{errorMsg}</p>
                 )}
-              </form>
+              </div>
             )}
-          </section>
-
-          {/* Ingredients */}
-          <section className="ingredients-section">
-            <div className="ingredients-header">
-              <p className="section-eyebrow">Transparency</p>
-              <h2 className="section-title">No Nasties.<br/>Just Nature.</h2>
-              <div className="rotated-tag">Simple Formulations Only</div>
-            </div>
-
-            <div className="ingredients">
-              <div className="ingredient-card shadow-green">
-                <div className="sticker-wrap">
-                  <img src="/sticker-tallow.png" alt="Grass Fed Tallow" className="sticker" />
-                </div>
-                <p className="ingredient-name">Grass Fed Tallow</p>
-                <p className="ingredient-body">Sourced from grass-fed UK cows. The foundation of every Uddy product.</p>
-              </div>
-              <div className="ingredient-card shadow-pink">
-                <div className="sticker-wrap">
-                  <img src="/sticker-jojoba.png" alt="Jojoba Oil" className="sticker" />
-                </div>
-                <p className="ingredient-name">Jojoba Oil</p>
-                <p className="ingredient-body">Lightweight and gentle. Helps lock in moisture without clogging pores.</p>
-              </div>
-              <div className="ingredient-card shadow-green">
-                <div className="sticker-wrap">
-                  <img src="/sticker-oat.png" alt="Oat Extract Oil" className="sticker" />
-                </div>
-                <p className="ingredient-name">Oat Extract Oil</p>
-                <p className="ingredient-body">Naturally soothing. Calms irritation and softens dry skin.</p>
-              </div>
-              <div className="ingredient-card shadow-pink">
-                <div className="sticker-wrap">
-                  <img src="/essential-oils.png" alt="Essential Oils" className="sticker" />
-                </div>
-                <p className="ingredient-name">Essential Oils</p>
-                <p className="ingredient-body">A drop of lavender. Just enough to calm the skin and the senses.</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Story */}
-          <section className="story">
-            <p className="story-pull">&ldquo;Uddy comes from our son, who couldn&rsquo;t say Daddy.&rdquo;</p>
-            <p className="story-body">
-              We&rsquo;re Jack &amp; Hollie. Jack had the bad skin
-              (eczema, acne, the works). Hollie had the idea.
-            </p>
-          </section>
-
-          {/* Footer */}
-          <footer className="footer">
-            <p className="footer-motto">
-              Your skin doesn&rsquo;t need fighting — it needs feeding.
-            </p>
-            <p className="footer-meta">© Uddy {new Date().getFullYear()}</p>
-          </footer>
+          </div>
         </div>
-      </main>
+
+        {/* Right hero panel */}
+        <div className="hero-panel">
+          <div className="hero-teal-wedge" />
+          <div className="hero-pink-shape" />
+          <img src="/prelaunch-hero.png" alt="Uddy skincare products" className="hero-img" />
+          {/* Badge inside hero for mobile positioning */}
+          <div className="coming-soon">
+            <span>COMING SOON</span>
+          </div>
+        </div>
+      </div>
 
       <style jsx>{`
-        /* Marquee provided by <Marquee /> component. */
-
-        /* ================ HEADER ================ */
-        .uddy-header {
-          background: #FAF5EF;
-          padding: 20px;
-          text-align: center;
-          border-bottom: 3px solid #1a1a1a;
-        }
-        .logo {
-          max-width: 280px;
-          height: auto;
-          display: inline-block;
-        }
-
-        /* ================ MAIN ================ */
-        .uddy-prelaunch {
-          background: #FAF5EF;
-          color: #1a1a1a;
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 400;
-          padding: 40px 20px 64px;
-        }
-        .container {
-          width: 100%;
-          max-width: 1000px;
-          margin: 0 auto;
-          animation: fadeUp 0.6s ease-out both;
-        }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(12px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ================ HERO BLOCK ================ */
-        .hero-block {
-          background: #F58AA0;
-          border: 3px solid #1a1a1a;
-          border-radius: 4px;
-          padding: 48px 32px 56px;
-          margin-bottom: 56px;
+        .page {
           position: relative;
-          box-shadow: 10px 10px 0 #1a1a1a;
-          text-align: center;
+          height: 100vh;
+          background: #dbd9d9;
+          overflow: hidden;
+          font-family: var(--font-inter), sans-serif;
         }
 
-        .hero-sticker {
+        /* ===== Background shapes ===== */
+        .bg-teal-top {
           position: absolute;
-          top: 28px;
-          right: 32px;
-          width: 110px;
-          height: 110px;
-          background: #FFD84D;
-          border: 3px solid #1a1a1a;
-          border-radius: 50%;
+          left: 0;
+          top: 0;
+          width: 37px;
+          height: 50%;
+          background: #009e8c;
+          z-index: 0;
+        }
+        .bg-pink-bottom {
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 37px;
+          height: 50%;
+          background: #d877b0;
+          z-index: 0;
+        }
+        .bg-teal-wedge {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 60.3%;
+          height: 11.2%;
+          background: #009e8c;
+          clip-path: polygon(0 0, 100% 0, 100% 100%);
+          z-index: 2;
+          pointer-events: none;
+        }
+        .bg-pink-shape {
+          position: absolute;
+          left: 19.6%;
+          top: 33.5%;
+          width: 41.3%;
+          height: 66.5%;
+          background: #d877b0;
+          clip-path: polygon(40% 0, 80% 0, 100% 100%, 0% 100%);
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        /* ===== Layout ===== */
+        .layout {
+          display: flex;
+          height: 100vh;
+          position: relative;
+        }
+
+        /* ===== Copy panel ===== */
+        .copy-panel {
+          flex: 0 0 52%;
+          background: #edece7;
+          margin-left: 2.57%;
+          height: 100vh;
+          position: relative;
+          z-index: 3;
+          overflow: hidden;
+        }
+        .copy-inner {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: clamp(8px, 1.6vh, 16px);
+          padding: clamp(12px, 2vh, 20px) clamp(16px, 3.1vh, 32px) calc(clamp(16px, 3.1vh, 32px) + 16px);
+          height: 100%;
+          box-sizing: border-box;
+        }
+        .wordmark {
+          width: 100%;
+          height: auto;
+          max-height: 38vh;
+          object-fit: contain;
+          object-position: center;
+          display: block;
+        }
+        .tagline-wrap {
+          text-align: center;
+          padding: clamp(4px, 0.8vh, 8px) 0;
+        }
+        .tagline {
+          font-weight: 800;
+          font-size: clamp(20px, 4.5vh, 46px);
+          color: #000;
+          letter-spacing: 0.02em;
+          margin: 0;
+        }
+        .yellow-box {
+          background: #f9d867;
+          border: 4px solid #000;
+          padding: clamp(8px, 1.6vh, 16px) 32px;
+          box-shadow: 4px 4px 0 #000;
+          display: flex;
+          flex-direction: column;
+          gap: clamp(8px, 2.3vh, 24px);
+        }
+        .yellow-box p {
+          margin: 0;
+          font-weight: 400;
+          font-size: clamp(13px, 2.3vh, 24px);
+          color: #000;
+          text-align: center;
+          line-height: 1.4;
+        }
+
+        /* ===== Signup ===== */
+        .signup-section {
+          display: flex;
+          flex-direction: column;
+          gap: clamp(6px, 1vh, 10px);
+          margin-top: 24px;
+          padding-bottom: clamp(8px, 1.6vh, 16px);
+        }
+        .signup-heading {
+          font-weight: 700;
+          font-size: clamp(20px, 3.9vh, 40px);
+          color: #000;
+          text-align: center;
+          margin: 0;
+          padding-bottom: 0;
+        }
+        .signup-form {
+          display: flex;
+          flex-direction: column;
+          gap: clamp(8px, 1.5vh, 15px);
+        }
+        .email-input {
+          width: 100%;
+          height: 60px;
+          padding: 0 16px;
+          border: 3px solid #000;
+          background: #fff;
+          font-family: var(--font-inter), sans-serif;
+          font-weight: 500;
+          font-size: 16px;
+          color: #000;
+          text-align: center;
+          box-shadow: 3px 3px 0 #000;
+          outline: none;
+          box-sizing: border-box;
+        }
+        .email-input::placeholder {
+          color: #a7a7a7;
+          text-align: center;
+        }
+        .email-input:focus {
+          box-shadow: 1px 1px 0 #000;
+          transform: translate(2px, 2px);
+        }
+        .submit-button {
+          width: 100%;
+          height: 60px;
+          padding: 0 16px;
+          border: 3px solid #000;
+          background: #009e8c;
+          color: #f9f5f0;
+          font-family: var(--font-inter), sans-serif;
+          font-weight: 900;
+          font-size: 16px;
+          cursor: pointer;
+          box-shadow: 3px 3px 0 #000;
+          transition: transform 0.08s ease, box-shadow 0.08s ease;
+          box-sizing: border-box;
           display: flex;
           align-items: center;
           justify-content: center;
-          transform: rotate(-12deg);
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 900;
-          font-size: 15px;
-          text-transform: uppercase;
-          line-height: 1.1;
-          text-align: center;
-          color: #1a1a1a;
-          box-shadow: 4px 4px 0 #1a1a1a;
-        }
-
-        .headline {
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 900;
-          font-size: clamp(64px, 13vw, 128px);
-          line-height: 0.88;
-          letter-spacing: -0.02em;
-          text-transform: uppercase;
-          margin: 0 auto 32px auto;
-          color: #ffffff;
-          text-shadow: 6px 6px 0 #1a1a1a;
-        }
-
-        .subhead-box {
-          display: inline-block;
-          background: #ffffff;
-          border: 3px solid #1a1a1a;
-          padding: 16px 22px;
-          box-shadow: 5px 5px 0 #1a1a1a;
-          max-width: 420px;
-          margin-bottom: 24px;
-        }
-        .subhead-box p {
-          margin: 0;
-          font-size: 17px;
-          line-height: 1.4;
-          font-weight: 500;
-          color: #1a1a1a;
-        }
-
-        /* ================ SIGNUP ================ */
-        .signup {
-          max-width: 580px;
-          margin: 40px auto 96px;
-          text-align: center;
-        }
-        .signup-heading {
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 900;
-          font-size: clamp(36px, 6vw, 52px);
-          text-transform: uppercase;
-          letter-spacing: -0.02em;
-          line-height: 1;
-          margin: 0 0 16px 0;
-          color: #1a1a1a;
-        }
-        .signup-sub {
-          font-size: 17px;
-          font-weight: 400;
-          margin: 0 0 40px 0;
-          color: #2a2a2a;
-        }
-        .form-row {
-          display: flex;
-          gap: 12px;
-          flex-wrap: wrap;
-        }
-        .email-input {
-          flex: 1;
-          min-width: 0;
-          padding: 16px 20px;
-          border: 3px solid #1a1a1a;
-          border-radius: 4px;
-          background: #ffffff;
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-size: 16px;
-          font-weight: 500;
-          color: #1a1a1a;
-          outline: none;
-          box-shadow: 4px 4px 0 #1a1a1a;
-          transition: transform 0.08s ease, box-shadow 0.08s ease;
-        }
-        .email-input:focus {
-          transform: translate(2px, 2px);
-          box-shadow: 2px 2px 0 #1a1a1a;
-        }
-        .email-input::placeholder { color: #999; }
-
-        .submit-button {
-          padding: 16px 32px;
-          border: 3px solid #1a1a1a;
-          border-radius: 4px;
-          background: #2FA07A;
-          color: #ffffff;
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 900;
-          font-size: 16px;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          cursor: pointer;
-          box-shadow: 5px 5px 0 #1a1a1a;
-          transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
-          white-space: nowrap;
         }
         .submit-button:hover:not(:disabled) {
-          transform: translate(3px, 3px);
-          box-shadow: 2px 2px 0 #1a1a1a;
+          transform: translate(2px, 2px);
+          box-shadow: 1px 1px 0 #000;
         }
         .submit-button:active:not(:disabled) {
-          transform: translate(5px, 5px);
-          box-shadow: 0 0 0 #1a1a1a;
+          transform: translate(3px, 3px);
+          box-shadow: 0 0 0 #000;
         }
         .submit-button:disabled {
-          opacity: 0.6;
+          opacity: 0.5;
           cursor: not-allowed;
         }
         .error-message {
-          margin: 14px 4px 0;
+          margin: 0;
           font-size: 14px;
           color: #b42318;
           font-weight: 600;
         }
 
+        /* ===== Success card ===== */
         .success-card {
-          background: #ffffff;
-          border: 3px solid #1a1a1a;
+          flex: 0 0 auto;
+          background: #fff;
+          border: 4px solid #000;
           padding: 32px 24px;
-          box-shadow: 8px 8px 0 #2FA07A;
-          border-radius: 4px;
+          box-shadow: 4px 4px 0 #009e8c;
+          margin-top: 16px;
         }
         .success-heading {
-          font-family: var(--font-montserrat), system-ui, sans-serif;
           font-weight: 900;
-          font-size: clamp(28px, 5vw, 40px);
+          font-size: clamp(24px, 2.5vw, 36px);
           text-transform: uppercase;
           margin: 0 0 12px 0;
           line-height: 1;
+          color: #000;
         }
         .success-card p {
           margin: 0;
           font-size: 16px;
           font-weight: 400;
           line-height: 1.5;
-          color: #1a1a1a;
+          color: #000;
         }
 
-        /* ================ INGREDIENTS ================ */
-        .ingredients-section {
-          margin-bottom: 72px;
-        }
-        .ingredients-header {
-          margin-bottom: 40px;
+        /* ===== Hero panel ===== */
+        .hero-panel {
+          flex: 1;
           position: relative;
-        }
-        .section-eyebrow {
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 900;
-          font-size: 14px;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          color: #1a1a1a;
-          margin: 0 0 12px 0;
-        }
-        .section-title {
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 900;
-          font-size: clamp(42px, 7vw, 72px);
-          line-height: 0.95;
-          letter-spacing: -0.02em;
-          text-transform: uppercase;
-          margin: 0;
-          color: #1a1a1a;
-        }
-        .rotated-tag {
-          display: inline-block;
-          position: absolute;
-          top: 10px;
-          right: 0;
-          background: #1a1a1a;
-          color: #ffffff;
-          padding: 10px 18px;
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 900;
-          font-size: 13px;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          transform: rotate(-4deg);
-        }
-        @media (max-width: 720px) {
-          .rotated-tag {
-            position: static;
-            margin-top: 20px;
-            transform: rotate(-3deg);
-          }
-        }
-
-        .ingredients {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 24px;
-        }
-        .ingredient-card {
-          background: #ffffff;
-          border: 3px solid #1a1a1a;
-          padding: 20px 18px 22px;
-          border-radius: 4px;
-          text-align: center;
+          z-index: 1;
           display: flex;
-          flex-direction: column;
-          align-items: center;
+          align-items: stretch;
         }
-        .shadow-green { box-shadow: 6px 6px 0 #2FA07A; }
-        .shadow-pink { box-shadow: 6px 6px 0 #F58AA0; }
-
-        .sticker-wrap {
-          height: 130px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 14px;
-        }
-        .sticker {
-          max-height: 130px;
-          max-width: 110px;
-          width: auto;
+        .hero-img {
+          width: 100%;
+          height: 100%;
           object-fit: contain;
+          object-position: center;
+          display: block;
         }
-        .ingredient-name {
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 900;
-          font-size: 15px;
-          text-transform: uppercase;
-          letter-spacing: -0.01em;
-          margin: 0 0 8px 0;
-          line-height: 1.1;
-          color: #1a1a1a;
-          min-height: 36px;
+        .hero-teal-wedge,
+        .hero-pink-shape {
+          display: none;
+        }
+        .coming-soon {
+          position: absolute;
+          left: calc(65% + 48px);
+          top: calc(27.8% + 64px);
+          transform: translate(-50%, -50%) rotate(17deg);
+          width: 121px;
+          height: 121px;
+          background: #f9d867;
+          border: 3.9px solid #000;
+          border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
+          box-shadow: 3.5px 2.2px 0 #000;
+          z-index: 4;
         }
-        .ingredient-body {
-          font-size: 13px;
-          font-weight: 400;
-          line-height: 1.4;
-          margin: 0;
-          color: #2a2a2a;
-        }
-
-        /* ================ STORY ================ */
-        .story {
-          background: #F58AA0;
-          border: 3px solid #1a1a1a;
-          padding: 48px 32px;
+        .coming-soon span {
+          font-weight: 800;
+          font-size: 15px;
+          color: #000;
           text-align: center;
-          margin-bottom: 56px;
-          box-shadow: 8px 8px 0 #1a1a1a;
-          border-radius: 4px;
-          background-image: radial-gradient(circle, rgba(26,26,26,0.08) 1.5px, transparent 1.5px);
-          background-size: 18px 18px;
-        }
-        .story-pull {
-          font-family: var(--font-kalam), cursive;
-          font-size: clamp(28px, 5vw, 42px);
-          line-height: 1.1;
-          margin: 0 0 20px 0;
-          color: #1a1a1a;
-          transform: rotate(-1deg);
-        }
-        .story-body {
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-size: 17px;
-          font-weight: 500;
-          line-height: 1.5;
-          margin: 0 auto;
-          color: #1a1a1a;
-          max-width: 480px;
+          letter-spacing: 0.02em;
+          line-height: 1.2;
+          width: 82px;
         }
 
-        /* ================ FOOTER ================ */
-        .footer {
-          text-align: center;
-          padding-top: 24px;
-          border-top: 2px solid #1a1a1a;
-        }
-        .footer-motto {
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 400;
-          font-style: italic;
-          font-size: 16px;
-          margin: 0 0 6px 0;
-          color: #1a1a1a;
-        }
-        .footer-meta {
-          margin: 0;
-          font-size: 13px;
-          color: #666;
-          font-weight: 500;
-        }
-
-        @media (max-width: 720px) {
-          .hero-sticker {
-            width: 90px;
-            height: 90px;
-            font-size: 13px;
-            top: 16px;
-            right: 16px;
+        /* ===== Mobile ===== */
+        @media (max-width: 900px) {
+          .page {
+            height: auto;
+            max-width: 100vw;
+            overflow-x: hidden;
           }
-          .hero-block {
-            padding: 36px 24px 40px;
+          .layout {
+            flex-direction: column;
+            height: auto;
           }
-          .ingredients {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+          .copy-panel {
+            flex: 0 0 auto;
+            width: 100%;
+            margin-left: 0;
+            height: auto;
+            overflow: hidden;
           }
-        }
-        @media (max-width: 480px) {
-          .form-row { flex-direction: column; }
-          .submit-button { width: 100%; }
-          .ingredients {
+          .copy-inner {
+            padding: 32px 20px;
+            height: auto;
             gap: 16px;
+            justify-content: flex-start;
+          }
+          .wordmark {
+            max-height: none;
+          }
+          .tagline {
+            font-size: clamp(18px, 5vw, 32px);
+          }
+          .yellow-box {
+            padding-left: 16px;
+            padding-right: 16px;
+          }
+          /* ===== Hero photo section (mobile) ===== */
+          .hero-panel {
+            display: block;
+            flex: none;
+            height: 135vw;
+            min-height: 0;
+            width: 100%;
+            position: relative;
+            background: #dbd9d9;
+            overflow: hidden;
+            z-index: 1;
+          }
+          .hero-img {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 96%;
+            object-fit: contain;
+            object-position: center top;
+          }
+
+          /* Mobile shapes inside hero-panel */
+          .hero-teal-wedge {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 9%;
+            background: #009e8c;
+            clip-path: polygon(0 0, 100% 0, 100% 40%, 0 100%);
+            z-index: 2;
+            pointer-events: none;
+          }
+          .hero-pink-shape {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 30%;
+            width: 23%;
+            height: 70%;
+            background: #d877b0;
+            clip-path: polygon(0 0, 0 100%, 100% 100%);
+            z-index: 2;
+            pointer-events: none;
+          }
+
+          /* Hide layout-level shapes on mobile */
+          .bg-teal-top {
+            width: 100%;
+            height: 10px;
+            left: 0;
+            top: 0;
+            z-index: 5;
+          }
+          .bg-pink-bottom {
+            display: none;
+          }
+          .bg-teal-wedge {
+            display: none;
+          }
+          .bg-pink-shape {
+            display: none;
+          }
+
+          /* Coming Soon badge */
+          .coming-soon {
+            left: auto;
+            right: 42px;
+            top: 36%;
+            width: 83px;
+            height: 83px;
+            border-width: 2.7px;
+            box-shadow: 2.2px 1.3px 0 #000;
+            transform: rotate(17deg);
+          }
+          .coming-soon span {
+            font-size: 10.7px;
+            width: 56px;
           }
         }
       `}</style>
-    </>
+
+      <style jsx global>{`
+        body {
+          margin: 0;
+          overflow-x: hidden;
+        }
+        @media (max-width: 900px) {
+          html, body {
+            overflow-x: hidden !important;
+          }
+        }
+      `}</style>
+    </div>
   );
 }
