@@ -4,6 +4,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendConfirmationEmail(email: string, token: string) {
   const confirmUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/confirm?token=${token}`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://uddyskin.com';
 
   const html = `
     <!DOCTYPE html>
@@ -13,71 +14,73 @@ export async function sendConfirmationEmail(email: string, token: string) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Confirm your email</title>
       </head>
-      <body style="margin:0; padding:0; background:#F5F2ED; font-family:Arial,Helvetica,sans-serif; color:#000;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F5F2ED;">
+      <body style="margin:0; padding:0; background:#edece7; font-family:Arial,Helvetica,sans-serif; color:#000;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#edece7;">
           <tr>
-            <td align="center" style="padding:48px 24px;">
-              <table role="presentation" width="520" cellpadding="0" cellspacing="0" style="max-width:520px; background:#ffffff; border:3px solid #000; box-shadow:4px 4px 0 #000;">
+            <td align="center" style="padding:40px 24px;">
 
-                <!-- Main content -->
+              <!-- Outer border wrapper -->
+              <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px; background:#edece7; border:1px dashed #999; padding:0;">
                 <tr>
-                  <td style="padding:40px 40px 0 40px;">
+                  <td style="padding:44px 44px 36px 44px;">
+
                     <!-- Wordmark -->
-                    <h1 style="margin:0 0 28px 0; font-size:42px; line-height:1; font-weight:900; letter-spacing:-0.02em; font-family:Arial,Helvetica,sans-serif; color:#000;">uddy.</h1>
+                    <img src="${baseUrl}/uddy-wordmark.svg" alt="uddy." width="220" style="display:block; width:220px; height:auto; margin-bottom:28px;" />
 
                     <!-- Heading -->
-                    <h2 style="margin:0 0 12px 0; font-size:32px; line-height:1.1; font-weight:900; font-family:Arial,Helvetica,sans-serif; color:#009e8c; text-transform:uppercase;">YOU&rsquo;RE NEARLY IN.</h2>
+                    <h1 style="margin:0 0 10px 0; font-size:38px; line-height:1.05; font-weight:900; font-family:Arial,Helvetica,sans-serif; color:#009e8c; text-transform:uppercase;">YOU&#8217;RE NEARLY IN.</h1>
 
                     <!-- Sub-heading -->
-                    <p style="margin:0 0 28px 0; font-size:17px; line-height:1.5; font-family:Arial,Helvetica,sans-serif; color:#000;">One quick click and you&rsquo;re officially part of the herd.</p>
+                    <p style="margin:0 0 28px 0; font-size:17px; line-height:1.5; font-family:Arial,Helvetica,sans-serif; color:#000;">One quick click and you&#8217;re officially part of the herd.</p>
 
                     <!-- Section heading -->
-                    <p style="margin:0 0 16px 0; font-size:14px; line-height:1.4; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#009e8c; text-transform:uppercase; letter-spacing:0.04em; border-bottom:2px solid #000; padding-bottom:8px;">HERE&rsquo;S WHAT YOU&rsquo;LL GET:</p>
+                    <p style="margin:0 0 4px 0; font-size:13px; line-height:1.4; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#009e8c; text-transform:uppercase; letter-spacing:0.06em;">HERE&#8217;S WHAT YOU&#8217;LL GET:</p>
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px; border-top:2px solid #000;"><tr><td style="font-size:0; height:0;">&nbsp;</td></tr></table>
 
-                    <!-- Bullet list -->
+                    <!-- Bullet list with icons -->
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:28px;">
                       <tr>
-                        <td style="padding:10px 0; border-bottom:1px solid #e0ddd8;">
+                        <td style="padding:12px 0; border-bottom:1px solid #ccc;">
                           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                            <td style="font-size:16px; color:#000; padding-right:10px; vertical-align:top; font-weight:700;">&bull;</td>
-                            <td style="font-size:15px; font-weight:700; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em;">FIRST ACCESS TO OUR LAUNCH</td>
+                            <td width="36" style="font-size:20px; color:#c9a227; vertical-align:middle; font-family:Arial,sans-serif;">&#128274;</td>
+                            <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">FIRST ACCESS TO OUR LAUNCH</td>
                           </tr></table>
                         </td>
                       </tr>
                       <tr>
-                        <td style="padding:10px 0; border-bottom:1px solid #e0ddd8;">
+                        <td style="padding:12px 0; border-bottom:1px solid #ccc;">
                           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                            <td style="font-size:16px; color:#000; padding-right:10px; vertical-align:top; font-weight:700;">&bull;</td>
-                            <td style="font-size:15px; font-weight:700; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em;">EARLY DISCOUNTS</td>
+                            <td width="36" style="font-size:20px; color:#c9a227; vertical-align:middle; font-family:Arial,sans-serif;">&#128179;</td>
+                            <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">EARLY DISCOUNTS</td>
                           </tr></table>
                         </td>
                       </tr>
                       <tr>
-                        <td style="padding:10px 0; border-bottom:1px solid #e0ddd8;">
+                        <td style="padding:12px 0; border-bottom:1px solid #ccc;">
                           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                            <td style="font-size:16px; color:#000; padding-right:10px; vertical-align:top; font-weight:700;">&bull;</td>
-                            <td style="font-size:15px; font-weight:700; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em;">BEHIND-THE-SCENES UPDATES</td>
+                            <td width="36" style="font-size:20px; color:#c9a227; vertical-align:middle; font-family:Arial,sans-serif;">&#128248;</td>
+                            <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">BEHIND-THE-SCENES UPDATES</td>
                           </tr></table>
                         </td>
                       </tr>
                       <tr>
-                        <td style="padding:10px 0;">
+                        <td style="padding:12px 0;">
                           <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                            <td style="font-size:16px; color:#000; padding-right:10px; vertical-align:top; font-weight:700;">&bull;</td>
-                            <td style="font-size:15px; font-weight:700; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em;">FIRST DIBS ON LIMITED BATCHES</td>
+                            <td width="36" style="font-size:20px; color:#c9a227; vertical-align:middle; font-family:Arial,sans-serif;">&#11088;</td>
+                            <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">FIRST DIBS ON LIMITED BATCHES</td>
                           </tr></table>
                         </td>
                       </tr>
                     </table>
 
                     <!-- CTA Button -->
-                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:24px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:16px;">
                       <tr>
                         <td align="center">
-                          <table role="presentation" cellpadding="0" cellspacing="0">
+                          <table role="presentation" cellpadding="0" cellspacing="0" width="80%">
                             <tr>
-                              <td style="background:#009e8c; border:3px solid #000; box-shadow:3px 3px 0 #000;">
-                                <a href="${confirmUrl}" style="display:inline-block; padding:16px 40px; font-size:17px; font-weight:900; color:#f9f5f0; text-decoration:none; font-family:Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:0.03em;">CONFIRM MY EMAIL</a>
+                              <td align="center" style="background:#5de0c5; border-radius:8px; box-shadow:4px 4px 0 #000;">
+                                <a href="${confirmUrl}" style="display:block; padding:18px 20px; font-size:18px; font-weight:900; color:#000; text-decoration:none; font-family:Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:0.04em; text-align:center;">CONFIRM MY EMAIL</a>
                               </td>
                             </tr>
                           </table>
@@ -85,29 +88,41 @@ export async function sendConfirmationEmail(email: string, token: string) {
                       </tr>
                     </table>
 
+                    <!-- Click the button line -->
+                    <p style="margin:0 0 24px 0; font-size:14px; line-height:1.5; font-family:Georgia,'Times New Roman',serif; font-style:italic; color:#666; text-align:center;">&#8618; Click the button above to join the herd.</p>
+
                     <!-- Divider -->
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
-                      <tr><td style="border-top:2px solid #000; font-size:0; height:0;">&nbsp;</td></tr>
+                      <tr><td style="border-top:1px solid #ccc; font-size:0; height:0;">&nbsp;</td></tr>
                     </table>
 
-                    <!-- No spam line -->
-                    <p style="margin:0 0 4px 0; font-size:14px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em;">NO SPAM. NO NONSENSE.</p>
-                    <p style="margin:0 0 20px 0; font-size:14px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#009e8c; text-transform:uppercase; letter-spacing:0.02em;">JUST UDDY.</p>
+                    <!-- No spam block -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+                      <tr>
+                        <td width="36" style="font-size:22px; vertical-align:top; color:#c9a227;">&#128004;</td>
+                        <td style="vertical-align:top;">
+                          <p style="margin:0 0 2px 0; font-size:14px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em;">NO SPAM. NO NONSENSE.</p>
+                          <p style="margin:0; font-size:14px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#009e8c; text-transform:uppercase; letter-spacing:0.02em;">JUST UDDY.</p>
+                        </td>
+                      </tr>
+                    </table>
 
                     <!-- Signature -->
-                    <p style="margin:0 0 0 0; font-size:16px; font-weight:700; font-family:Arial,Helvetica,sans-serif; color:#000;">&mdash; Jack &amp; Hollie</p>
+                    <p style="margin:0 0 0 0; font-size:20px; font-family:Georgia,'Times New Roman',serif; font-style:italic; color:#000;">&mdash; Jack &amp; Hollie</p>
+
                   </td>
                 </tr>
 
                 <!-- Fallback / fine print -->
                 <tr>
-                  <td style="padding:24px 40px; border-top:3px solid #000;">
-                    <p style="margin:0 0 12px 0; font-size:13px; line-height:1.5; color:#666; font-family:Arial,Helvetica,sans-serif;">If the button doesn&rsquo;t work, paste this into your browser:<br/><a href="${confirmUrl}" style="color:#666; word-break:break-all;">${confirmUrl}</a></p>
-                    <p style="margin:0; font-size:13px; line-height:1.5; color:#666; font-family:Arial,Helvetica,sans-serif;">If you didn&rsquo;t sign up, just ignore this email and nothing will happen.</p>
+                  <td style="padding:20px 44px 32px 44px; border-top:1px solid #ccc;">
+                    <p style="margin:0 0 10px 0; font-size:12px; line-height:1.5; color:#888; font-family:Arial,Helvetica,sans-serif;">If the button doesn&#8217;t work, paste this into your browser:<br/><a href="${confirmUrl}" style="color:#888; word-break:break-all;">${confirmUrl}</a></p>
+                    <p style="margin:0; font-size:12px; line-height:1.5; color:#888; font-family:Arial,Helvetica,sans-serif;">If you didn&#8217;t sign up, just ignore this email and nothing will happen.</p>
                   </td>
                 </tr>
 
               </table>
+
             </td>
           </tr>
         </table>
@@ -129,7 +144,7 @@ Confirm your email to join the list: ${confirmUrl}
 
 NO SPAM. NO NONSENSE. JUST UDDY.
 
-— Jack & Hollie
+-- Jack & Hollie
 
 If the button doesn't work, paste this into your browser: ${confirmUrl}
 If you didn't sign up, just ignore this email.`;
