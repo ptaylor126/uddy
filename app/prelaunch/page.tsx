@@ -65,7 +65,7 @@ export default function PrelaunchPage() {
             </div>
 
             <div className="yellow-box">
-              <p>Most skincare is packed with ingredients you can&rsquo;t pronounce. Uddy keeps it simple. Grass-fed tallow. Natural ingredients. Nothing fake.</p>
+              <p>Most skincare is packed with ingredients you can&rsquo;t pronounce. Uddy keeps it simple. Grass-fed tallow. Natural ingredients. <span className="nothing-fake">Nothing fake.</span></p>
             </div>
 
             {status === 'success' ? (
@@ -237,6 +237,9 @@ export default function PrelaunchPage() {
           color: #000;
           text-align: center;
           line-height: 1.4;
+        }
+        .nothing-fake {
+          display: inline;
         }
         .signup-list {
           margin: 0;
@@ -450,6 +453,10 @@ export default function PrelaunchPage() {
           .yellow-box {
             padding-left: 16px;
             padding-right: 16px;
+          }
+          .nothing-fake {
+            display: block;
+            margin-top: 4px;
           }
           /* ===== Hero photo section (mobile) ===== */
           .hero-panel {
