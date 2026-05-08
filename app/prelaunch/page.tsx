@@ -12,6 +12,7 @@ const inter = Inter({
 
 export default function PrelaunchPage() {
   const [email, setEmail] = useState('');
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -60,12 +61,17 @@ export default function PrelaunchPage() {
             <img src="/uddy-wordmark.svg" alt="Uddy" className="wordmark" />
 
             <div className="tagline-wrap">
-              <p className="tagline">NO NASTIES. JUST NATURE</p>
+              <p className="tagline">JOIN THE HERD</p>
             </div>
 
             <div className="yellow-box">
-              <p>Nothing fancy. Nothing fake. Just three ingredients doing what they&rsquo;re supposed to.</p>
-              <p>Simple, tallow-based skincare for dry and sensitive skin.</p>
+              <p>Most skincare is packed with ingredients you can&rsquo;t pronounce. Uddy keeps it simple. Grass-fed tallow. Natural ingredients. Nothing fake.</p>
+              <h3 className="yellow-box-heading">Sign up for:</h3>
+              <ul className="yellow-box-list">
+                <li>Launch discounts</li>
+                <li>First dibs on our first batch</li>
+                <li>Behind-the-scenes updates</li>
+              </ul>
             </div>
 
             {status === 'success' ? (
@@ -93,7 +99,7 @@ export default function PrelaunchPage() {
                   />
                   <button
                     type="submit"
-                    disabled={status === 'loading' || !email}
+                    disabled={status === 'loading' || !isValidEmail}
                     className="submit-button"
                   >
                     {status === 'loading' ? 'Sending\u2026' : 'GET NOTIFIED (FEED YOUR FACE)'}
@@ -230,6 +236,29 @@ export default function PrelaunchPage() {
           font-size: clamp(13px, 2.3vh, 24px);
           color: #000;
           text-align: center;
+          line-height: 1.4;
+        }
+        .yellow-box-heading {
+          margin: clamp(4px, 1vh, 10px) 0 0 0;
+          font-weight: 800;
+          font-size: clamp(13px, 2.3vh, 24px);
+          color: #000;
+          text-align: center;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+        }
+        .yellow-box-list {
+          margin: 0;
+          padding: 0 0 0 24px;
+          list-style: disc;
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+        }
+        .yellow-box-list li {
+          font-weight: 400;
+          font-size: clamp(13px, 2.1vh, 22px);
+          color: #000;
           line-height: 1.4;
         }
 
