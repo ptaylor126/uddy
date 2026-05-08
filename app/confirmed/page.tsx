@@ -12,22 +12,26 @@ export default async function ConfirmedPage({
       case 'success':
         return {
           heading: "You're in.",
-          body: "Thanks for confirming. We'll be in touch before we launch.",
+          subtitle: "Welcome to the herd.",
+          body: "We'll keep you posted as we get closer to launch.",
         };
       case 'already':
         return {
           heading: "Already confirmed.",
+          subtitle: null,
           body: "Your email is already on the list. Nothing more to do.",
         };
       case 'invalid':
         return {
           heading: "Link expired.",
+          subtitle: null,
           body: "This link is invalid or has already been used. You can sign up again from the home page.",
         };
       case 'error':
       default:
         return {
           heading: "Something went wrong.",
+          subtitle: null,
           body: "We couldn't confirm your email. Please try signing up again.",
         };
     }
@@ -41,8 +45,9 @@ export default async function ConfirmedPage({
         <div className="wedge-pink" />
 
         <div className="card">
-          <h1 className="wordmark">uddy.</h1>
+          <img src="/uddy-wordmark.svg" alt="uddy." className="wordmark" />
           <h2 className="heading">{content.heading}</h2>
+          {content.subtitle && <p className="subtitle">{content.subtitle}</p>}
           <p className="body">{content.body}</p>
           <p className="signature">&mdash; Jack &amp; Hollie</p>
         </div>
@@ -66,24 +71,25 @@ export default async function ConfirmedPage({
           position: absolute;
           top: 0;
           left: 0;
-          width: 120px;
-          height: 120px;
+          width: 18vw;
+          height: 35vh;
           background: #009e8c;
           clip-path: polygon(0 0, 100% 0, 0 100%);
         }
         .wedge-pink {
           position: absolute;
           bottom: 0;
-          left: 0;
-          width: 140px;
-          height: 140px;
+          right: 0;
+          width: 22vw;
+          height: 40vh;
           background: #d877b0;
-          clip-path: polygon(0 0, 0 100%, 100% 100%);
+          clip-path: polygon(100% 0, 0 100%, 100% 100%);
         }
         .card {
           max-width: 480px;
+          width: 100%;
           text-align: center;
-          padding: 40px 32px;
+          padding: 48px 40px;
           background: #ffffff;
           border: 3px solid #000;
           box-shadow: 4px 4px 0 #000;
@@ -96,34 +102,41 @@ export default async function ConfirmedPage({
           to { opacity: 1; transform: translateY(0); }
         }
         .wordmark {
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 900;
-          font-size: 36px;
-          letter-spacing: -0.03em;
-          margin: 0 0 24px 0;
-          text-transform: lowercase;
+          display: block;
+          width: 200px;
+          height: auto;
+          margin: 0 auto 28px auto;
         }
         .heading {
           font-family: var(--font-montserrat), system-ui, sans-serif;
           font-weight: 900;
-          font-size: 32px;
+          font-size: 34px;
           line-height: 1.1;
-          margin: 0 0 16px 0;
+          margin: 0 0 12px 0;
           color: #009e8c;
           text-transform: uppercase;
+        }
+        .subtitle {
+          font-family: var(--font-montserrat), system-ui, sans-serif;
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 1.4;
+          margin: 0 0 8px 0;
+          color: #000;
         }
         .body {
           font-family: var(--font-montserrat), system-ui, sans-serif;
           font-weight: 400;
-          font-size: 16px;
+          font-size: 15px;
           line-height: 1.55;
           margin: 0 0 24px 0;
+          color: #666;
         }
         .signature {
-          font-family: var(--font-montserrat), system-ui, sans-serif;
-          font-weight: 700;
-          font-size: 16px;
-          color: #666;
+          font-family: Georgia, 'Times New Roman', serif;
+          font-style: italic;
+          font-size: 18px;
+          color: #444;
           margin: 0;
         }
       `}</style>
