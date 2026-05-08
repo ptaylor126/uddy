@@ -508,7 +508,12 @@ export default function PrelaunchPage() {
             z-index: 5;
           }
           .bg-pink-bottom {
-            display: none;
+            display: block;
+            top: 10px;
+            bottom: auto;
+            width: 100%;
+            height: 6px;
+            z-index: 5;
           }
           .bg-teal-wedge {
             display: none;
