@@ -103,7 +103,8 @@ export default async function ConfirmedPage({
         }
         .wordmark {
           display: block;
-          width: 200px;
+          width: 100%;
+          max-width: 600px;
           height: auto;
           margin: 0 auto 28px auto;
         }
