@@ -71,8 +71,8 @@ export default async function ConfirmedPage({
           position: absolute;
           top: 0;
           left: 0;
-          width: 18vw;
-          height: 35vh;
+          width: 30vw;
+          height: 55vh;
           background: #009e8c;
           clip-path: polygon(0 0, 100% 0, 0 100%);
         }
@@ -80,8 +80,8 @@ export default async function ConfirmedPage({
           position: absolute;
           bottom: 0;
           right: 0;
-          width: 22vw;
-          height: 40vh;
+          width: 35vw;
+          height: 60vh;
           background: #d877b0;
           clip-path: polygon(100% 0, 0 100%, 100% 100%);
         }

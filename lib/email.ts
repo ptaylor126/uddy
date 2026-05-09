@@ -19,16 +19,8 @@ export async function sendConfirmationEmail(email: string, token: string) {
           <tr>
             <td align="center" style="padding:40px 24px;">
 
-              <!-- Shadow layer (black block offset behind the card) -->
-              <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;">
-                <tr>
-                  <td style="background:#000; padding:0 0 4px 0;">
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="padding:0 0 0 0;">
-
-                          <!-- Main card -->
-                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#edece7; border:3px solid #000; margin:0 4px 4px 0;">
+              <!-- Main card with thick right+bottom border to fake shadow -->
+              <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px; background:#edece7; border-top:3px solid #000; border-left:3px solid #000; border-right:7px solid #000; border-bottom:7px solid #000;">
                             <tr>
                               <td style="padding:44px 44px 36px 44px;">
 
@@ -50,7 +42,7 @@ export async function sendConfirmationEmail(email: string, token: string) {
                                   <tr>
                                     <td style="padding:12px 0; border-bottom:1px solid #ccc;">
                                       <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                                        <td width="28" style="font-size:14px; color:#000; vertical-align:middle; font-family:Arial,sans-serif;">&#10038;</td>
+                                        <td width="28" style="vertical-align:middle;"><img src="${baseUrl}/scribble-bullet.svg" alt="" width="14" height="14" style="display:block;" /></td>
                                         <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">FIRST ACCESS TO OUR LAUNCH</td>
                                       </tr></table>
                                     </td>
@@ -58,7 +50,7 @@ export async function sendConfirmationEmail(email: string, token: string) {
                                   <tr>
                                     <td style="padding:12px 0; border-bottom:1px solid #ccc;">
                                       <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                                        <td width="28" style="font-size:14px; color:#000; vertical-align:middle; font-family:Arial,sans-serif;">&#10038;</td>
+                                        <td width="28" style="vertical-align:middle;"><img src="${baseUrl}/scribble-bullet.svg" alt="" width="14" height="14" style="display:block;" /></td>
                                         <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">EARLY DISCOUNTS</td>
                                       </tr></table>
                                     </td>
@@ -66,7 +58,7 @@ export async function sendConfirmationEmail(email: string, token: string) {
                                   <tr>
                                     <td style="padding:12px 0; border-bottom:1px solid #ccc;">
                                       <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                                        <td width="28" style="font-size:14px; color:#000; vertical-align:middle; font-family:Arial,sans-serif;">&#10038;</td>
+                                        <td width="28" style="vertical-align:middle;"><img src="${baseUrl}/scribble-bullet.svg" alt="" width="14" height="14" style="display:block;" /></td>
                                         <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">BEHIND-THE-SCENES UPDATES</td>
                                       </tr></table>
                                     </td>
@@ -74,27 +66,21 @@ export async function sendConfirmationEmail(email: string, token: string) {
                                   <tr>
                                     <td style="padding:12px 0;">
                                       <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-                                        <td width="28" style="font-size:14px; color:#000; vertical-align:middle; font-family:Arial,sans-serif;">&#10038;</td>
+                                        <td width="28" style="vertical-align:middle;"><img src="${baseUrl}/scribble-bullet.svg" alt="" width="14" height="14" style="display:block;" /></td>
                                         <td style="font-size:15px; font-weight:800; font-family:Arial,Helvetica,sans-serif; color:#000; text-transform:uppercase; letter-spacing:0.02em; vertical-align:middle;">FIRST DIBS ON LIMITED BATCHES</td>
                                       </tr></table>
                                     </td>
                                   </tr>
                                 </table>
 
-                                <!-- CTA Button — faked shadow with nested table -->
+                                <!-- CTA Button — thick border shadow -->
                                 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:16px;">
                                   <tr>
                                     <td align="center">
                                       <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
-                                          <td style="background:#000; padding:0 0 3px 0;">
-                                            <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-                                              <tr>
-                                                <td align="center" style="background:#009e8c; border:3px solid #000; margin:0 3px 3px 0;">
-                                                  <a href="${confirmUrl}" style="display:block; padding:18px 20px; font-size:18px; font-weight:900; color:#f9f5f0; text-decoration:none; font-family:Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:0.04em; text-align:center;">CONFIRM MY EMAIL</a>
-                                                </td>
-                                              </tr>
-                                            </table>
+                                          <td align="center" style="background:#009e8c; border-top:3px solid #000; border-left:3px solid #000; border-right:6px solid #000; border-bottom:6px solid #000;">
+                                            <a href="${confirmUrl}" style="display:block; padding:18px 20px; font-size:18px; font-weight:900; color:#f9f5f0; text-decoration:none; font-family:Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:0.04em; text-align:center;">CONFIRM MY EMAIL</a>
                                           </td>
                                         </tr>
                                       </table>
@@ -135,13 +121,6 @@ export async function sendConfirmationEmail(email: string, token: string) {
                               </td>
                             </tr>
 
-                          </table>
-
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
               </table>
 
             </td>
