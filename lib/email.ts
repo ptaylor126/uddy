@@ -16,8 +16,8 @@ export async function sendConfirmationEmail(email: string, token: string) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Confirm your email</title>
       </head>
-      <body style="margin:0; padding:0; background:#edece7; font-family:Arial,Helvetica,sans-serif; color:#000;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#edece7;">
+      <body style="margin:0; padding:0; background:#ffffff; font-family:Arial,Helvetica,sans-serif; color:#000;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;">
           <tr>
             <td align="center" style="padding:40px 24px;">
 
@@ -30,7 +30,7 @@ export async function sendConfirmationEmail(email: string, token: string) {
                     <img src="${baseUrl}/uddy-wordmark.svg" alt="uddy." width="220" style="display:block; width:220px; height:auto; margin-bottom:28px;" />
 
                     <!-- Heading -->
-                    <h1 style="margin:0 0 10px 0; font-size:38px; line-height:1.05; font-weight:900; font-family:Arial,Helvetica,sans-serif; color:#009e8c; text-transform:uppercase;">YOU&#8217;RE NEARLY IN.</h1>
+                    <h1 style="margin:0 0 10px 0; font-size:38px; line-height:1.05; font-weight:900; font-family:Arial,Helvetica,sans-serif; color:#d877b0; text-transform:uppercase;">YOU&#8217;RE NEARLY IN.</h1>
 
                     <!-- Sub-heading -->
                     <p style="margin:0 0 28px 0; font-size:17px; line-height:1.5; font-family:Arial,Helvetica,sans-serif; color:#000;">One quick click and you&#8217;re officially part of the herd.</p>
@@ -91,7 +91,7 @@ export async function sendConfirmationEmail(email: string, token: string) {
                     </table>
 
                     <!-- Click the button line -->
-                    <p style="margin:0 0 24px 0; font-size:14px; line-height:1.5; font-family:Georgia,'Times New Roman',serif; font-style:italic; color:#666; text-align:center;">&#8618; Click the button above to join the herd.</p>
+                    <p style="margin:0 0 24px 0; font-size:14px; line-height:1.5; font-family:Georgia,'Times New Roman',serif; font-style:italic; color:#666; text-align:center;">Click the button above to join the herd.</p>
 
                     <!-- Divider -->
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
