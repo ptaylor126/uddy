@@ -91,7 +91,7 @@ export async function sendConfirmationEmail(email: string, token: string) {
                     </table>
 
                     <!-- Click the button line -->
-                    <p style="margin:0 0 24px 0; font-size:14px; line-height:1.5; font-family:Georgia,'Times New Roman',serif; font-style:italic; color:#666; text-align:center;">Click the button above to join the herd.</p>
+                    <p style="margin:0 0 24px 0; font-size:14px; line-height:1.5; font-family:Georgia,'Times New Roman',serif; font-style:italic; color:#666; text-align:center;">&#8618;&#xFE0E; Click the button above to join the herd.</p>
 
                     <!-- Divider -->
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
