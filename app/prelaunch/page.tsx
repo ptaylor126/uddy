@@ -64,6 +64,7 @@ export default function PrelaunchPage() {
               <p className="tagline">NO NASTIES. JUST NATURE</p>
             </div>
 
+            <p className="pills-label">made for skin that&rsquo;s:</p>
             <ul className="pills-row">
               <li className="pill">
                 <svg className="pill-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 24C14.3869 24 16.6761 23.0518 18.364 21.364C20.0518 19.6761 21 17.3869 21 15C21 12.5175 19.317 10.644 17.352 8.457C15.381 6.264 13.125 3.7545 12 0C12 0 3 8.529 3 15C3 17.3869 3.94821 19.6761 5.63604 21.364C7.32387 23.0518 9.61305 24 12 24ZM9.969 6.969L11.031 8.031C10.596 8.466 9.339 9.9975 8.1705 12.336L6.8295 11.664C8.0595 9.2025 9.405 7.5345 9.969 6.969Z" fill="currentColor"/></svg>
@@ -88,7 +89,7 @@ export default function PrelaunchPage() {
             </ul>
 
             <div className="yellow-box">
-              <p>Most skincare is packed with ingredients you can&rsquo;t pronounce. Uddy keeps it simple. Grass-fed tallow. Natural ingredients. <span className="nothing-fake">Nothing fake.</span></p>
+              <p>Most skincare is packed with ingredients you can&rsquo;t pronounce. Uddy keeps it simple. Tallow based. Natural ingredients. <span className="nothing-fake">Nothing fake.</span></p>
             </div>
 
             {status === 'success' ? (
@@ -245,6 +246,16 @@ export default function PrelaunchPage() {
           margin: 0;
         }
         /* ===== Pills row ===== */
+        .pills-label {
+          margin: 0 0 clamp(-6px, -1vh, -2px) 0;
+          text-align: center;
+          font-family: Georgia, 'Times New Roman', serif;
+          font-style: italic;
+          font-weight: 400;
+          font-size: clamp(12px, 1.5vw, 15px);
+          color: #555;
+          line-height: 1;
+        }
         .pills-row {
           display: flex;
           flex-wrap: wrap;
