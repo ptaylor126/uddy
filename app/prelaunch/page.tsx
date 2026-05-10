@@ -227,7 +227,7 @@ export default function PrelaunchPage() {
         .wordmark {
           width: 100%;
           height: auto;
-          max-height: 38vh;
+          max-height: 30vh;
           object-fit: contain;
           object-position: center;
           display: block;
@@ -249,26 +249,26 @@ export default function PrelaunchPage() {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
-          gap: 16px;
+          gap: clamp(6px, 1vw, 10px);
           list-style: none;
           margin: 0;
-          padding: clamp(4px, 0.8vh, 8px) 0;
+          padding: clamp(2px, 0.5vh, 6px) 0;
         }
         .pill {
           display: flex;
           align-items: center;
-          gap: 10px;
-          padding: 10px 16px;
+          gap: 6px;
+          padding: 6px 12px;
           border: 2px solid #000;
-          border-radius: 24px;
+          border-radius: 20px;
           font-weight: 700;
-          font-size: 14px;
+          font-size: clamp(10px, 1.3vw, 13px);
           color: #000;
           white-space: nowrap;
         }
         .pill-icon {
-          width: 24px;
-          height: 24px;
+          width: clamp(14px, 1.6vw, 18px);
+          height: clamp(14px, 1.6vw, 18px);
           flex-shrink: 0;
           color: #000;
         }
@@ -504,6 +504,19 @@ export default function PrelaunchPage() {
           }
           .tagline {
             font-size: clamp(18px, 5vw, 32px);
+          }
+          .pills-row {
+            gap: 8px;
+            padding: 4px 0;
+          }
+          .pill {
+            font-size: 11px;
+            padding: 6px 10px;
+            gap: 5px;
+          }
+          .pill-icon {
+            width: 15px;
+            height: 15px;
           }
           .yellow-box {
             padding-left: 16px;
