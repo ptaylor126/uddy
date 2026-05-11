@@ -175,7 +175,7 @@ NEXT_PUBLIC_SANITY_DATASET
 The page is a `'use client'` component using styled-jsx for all styling (no external CSS classes).
 
 ### Desktop Layout (>900px)
-- Left 52% = copy panel (cream `#edece7` bg): wordmark → "NO NASTIES. JUST NATURE" tagline → yellow info box → "JOIN THE HERD" heading → scribble bullet list → email input → CTA button
+- Left 52% = copy panel (cream `#edece7` bg): wordmark → "NO NASTIES. JUST NATURE" tagline → *"made for skin that's prone to:"* label (italic Georgia) → skin-type pills row (DRYNESS, SENSITIVITY, ECZEMA, ROSACEA, PSORIASIS — each with inline SVG icon, 2px black border, 20px radius) → yellow info box → "JOIN THE HERD" heading → scribble bullet list → email input → CTA button
 - Right = hero panel: product photo with teal/pink background shapes, "COMING SOON" badge
 - Left edge: teal/pink vertical strips
 - Background shapes: teal wedge top-right, pink trapezoid mid-left
@@ -235,6 +235,9 @@ After successful signup, the form is replaced with a success card ("You're on th
 6. Redesigned confirmation email to match brand — cream card on white bg, pink heading, teal CTA, scribble bullets, cow SVG, hard shadow via thick borders
 7. Redesigned confirmed page — full-width SVG wordmark, sharp card with shadow, teal/pink accent wedges (enlarged)
 8. Multiple rounds of Gmail/Android/iOS compatibility fixes for email template (shadow, bullets, arrow emoji)
+9. Added "made for skin that's prone to:" pills row (DRYNESS, SENSITIVITY, ECZEMA, ROSACEA, PSORIASIS) with inline SVG icons between tagline and yellow box
+10. Yellow box copy: "Grass-fed tallow" → "Tallow based"
+11. Updated prelaunch hero image
 
 ---
 
